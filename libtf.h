@@ -25,5 +25,24 @@ int	ft_strncmp(char *s1, char *s2, size_t n)
 	return (s1[i] - s2[i]);
 }
 
-int	ft_strlcpy
+
+size_t	ft_strcpy(char *dst, const char *src, size_t dstsize)
+{
+	size_t srcsize;
+	size_t i;
+
+	if (!dst || !src)
+		return (0);
+	srcsize = ft_strlen(src);
+	i = 0;
+	if (dstsize != 0)
+	{
+		while (src[i] != '\0' && i < (dstsize - 1))
+		{
+			dst[i] = src[i];
+		}
+		dst[i] = '\0';
+	}
+	return (srcsize);
+}
 
