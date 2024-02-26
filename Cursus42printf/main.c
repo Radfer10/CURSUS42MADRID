@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:57:19 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/02/26 19:27:11 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/02/26 20:38:12 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int main() {
 	const char c = 'A';
     char *str = "Hola, mundo!";
     unsigned int unum = 456;
-    void *ptr = 123;
+    void *ptr = &num;
 
 	ft_printf("Esto es un char: %c\n", c);
     ft_printf("Esto es un numero: %i\n", nb);
