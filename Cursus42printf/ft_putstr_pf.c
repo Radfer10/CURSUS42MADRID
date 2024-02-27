@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_pf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rde-migu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:45:03 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/02/23 17:58:31 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:27:01 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 void	ft_putstr_pf(char *str, int *len)
 {
@@ -18,11 +18,11 @@ void	ft_putstr_pf(char *str, int *len)
 
 	i = 0;
 	if (!str)
-			str = "(null)";
-		while (str[i] != '\0')
-		{
-			write(1, &str[i], 1);
+		str = "(null)";
+	while (str[i] != '\0')
+	{
+		write(1, &str[i], 1);
 		i++;
 		(*len)++;
-		}
+	}
 }

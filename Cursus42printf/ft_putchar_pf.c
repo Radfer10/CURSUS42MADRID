@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_pf.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rde-migu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:01:14 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/02/23 15:07:50 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:53:09 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "printf.h"
+
+#include "ft_printf.h"
 
 void	ft_putchar_pf(char c, int *i)
 {

@@ -6,11 +6,11 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:57:19 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/02/26 20:38:12 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:07:20 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 int main() {
 	int	nb = 1;
     int num = 123;

@@ -6,7 +6,7 @@
 #    By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 20:05:42 by rde-migu          #+#    #+#              #
-#    Updated: 2024/02/26 19:20:33 by rde-migu         ###   ########.fr        #
+#    Updated: 2024/02/27 16:59:10 by rde-migu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@ LIB = ar rcs
 RM = rm -f
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-NAME = printf.a
+NAME = libftprintf.a
 SRC = ft_putchar_pf.c ft_printf.c ft_putnbr_pf.c ft_putstr_pf.c ft_putunbr_pf.c ft_puthex_pf.c ft_puthexmayus_pf.c ft_puntero_pf.c
 OBJ = $(SRC:.c=.o)
-INCLUDE = printf.h
+INCLUDE = ft_printf.h
 
 all: $(NAME)
 

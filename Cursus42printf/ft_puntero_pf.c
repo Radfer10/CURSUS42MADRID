@@ -6,11 +6,11 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 18:54:57 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/02/26 19:22:06 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/02/27 19:57:35 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 size_t	ft_strlen(const char *len)
 {
@@ -24,25 +24,48 @@ size_t	ft_strlen(const char *len)
 	return (i);
 }
 
+void	ft_print_prefix(int *i)
+{
+	ft_putstr_pf("0x", i);
+}
+
+void	ft_print_hex_digit(unsigned long n, int *i)
+{
+	const char	*base;
+
+	base = "0123456789abcdef";
+	ft_putchar_pf(base[n], i);
+}
+
+void	ft_calculate_hex_length(unsigned long n, int *len)
+{
+	unsigned long	temp;
+
+	temp = n;
+	*len = 0;
+	while (temp != 0)
+	{
+		temp /= 16;
+		(*len)++;
+	}
+}
+
 void	ft_puntero_pf(void *ptr, int *i)
 {
 	unsigned long	n;
-	const char		*base;
+	int				len;
 
 	n = (unsigned long)ptr;
-	base = "0123456789abcdef";
-	ft_putstr_pf( "0x", i);
+	ft_print_prefix(i);
 	if (n == 0)
 	{
 		ft_putchar_pf('0', i);
-		return;
+		return ;
 	}
-	else
+	ft_calculate_hex_length(n, &len);
+	while (len > 0)
 	{
-		while (n != 0)
-		{
-			ft_putchar_pf(base[n % 16], i);
-			n /= 16;
-		}
+		len--;
+		ft_print_hex_digit((n >> (4 * len)) & 0xf, i);
 	}
 }

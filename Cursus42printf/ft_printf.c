@@ -6,14 +6,13 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:17:04 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/02/26 19:31:18 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:14:49 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-
-void	ft_format(va_list args,const char *str, int *i)
+void	ft_format(va_list args, const char *str, int *i)
 {
 	if (*str == 'c')
 		ft_putchar_pf(va_arg(args, int), i);
@@ -43,16 +42,15 @@ int	ft_printf(const char *str, ...)
 
 	i = 0;
 	len = 0;
-
 	va_start(args, str);
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] == '%')
 		{
 			i++;
 			ft_format(args, str + i, &len);
 		}
-		else 
+		else
 			ft_putchar_pf(str[i], &len);
 		i++;
 	}
@@ -71,7 +69,8 @@ int	ft_printf(const char *str, ...)
     ft_printf("Esto es un numero: %i\n", nb);
     ft_printf("Este es un número entero: %d\n", num);
     ft_printf("Este es el mismo número en formato hexadecimal: %x\n", num);
-	ft_printf("Este es el mismo número en formato hexadecimal en mayúsculas: %X\n", num);
+	ft_printf("Este es el mismo número en formato hexadecimal 
+	en mayúsculas: %X\n", num);
     ft_printf("Esta es una cadena de caracteres: %s\n", str);
     ft_printf("Este es un número sin signo: %u\n", unum);
 	ft_printf("Esto es n símbolo de porcentaje: %%\n");
@@ -80,5 +79,3 @@ int	ft_printf(const char *str, ...)
 
     return 0;
 }*/
-
-
