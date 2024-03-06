@@ -6,11 +6,11 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:24:54 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/03/04 17:32:29 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:39:42 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	*ft_calloc(size_t count, size_t size)
 {

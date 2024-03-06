@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 14:19:27 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/03/04 17:24:31 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:32:36 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,18 @@
 # include <fcntl.h>
 # include <stddef.h>
 # include <stdarg.h>
+# include <limits.h>
 
-typedef struct s_fd_buffer
-{
-	int			fd;
-	char		*buffer;
-	struct s_fd_buffer	*next;
-}t_fd_buffer;
-
-
-
-void	ft_add_fd(int fd);
-void    ft_free_fd();
+/*Main Funcion*/
 char	*get_next_line(int fd);
+
+/*Utils funcion*/
+void	*ft_calloc(size_t count, size_t size);
+void	*ft_memset(void *b, int c, size_t len);
+void	ft_bzero(void *s, size_t n);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *str, int c);
+size_t	ft_strlen(const char *str);
 
 
 #endif

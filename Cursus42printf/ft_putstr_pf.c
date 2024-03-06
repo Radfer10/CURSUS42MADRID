@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:45:03 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/02/27 18:27:01 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:31:40 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_putstr_pf(char *str, int *len)
 		str = "(null)";
 	while (str[i] != '\0')
 	{
-		write(1, &str[i], 1);
+		(write(1, &str[i], 1));
 		i++;
 		(*len)++;
 	}
