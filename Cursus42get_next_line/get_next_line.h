@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:01:50 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/03/06 11:32:19 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:36:19 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #  define BUFFER_SIZE 10000000
 #endif
 
+# include <limits.h> 
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
