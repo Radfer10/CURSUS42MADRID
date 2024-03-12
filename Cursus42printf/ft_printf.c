@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:17:04 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/02/27 18:14:49 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:02:34 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@ void	ft_format(va_list args, const char *str, int *i)
 {
 	if (*str == 'c')
 		ft_putchar_pf(va_arg(args, int), i);
-	if (*str == 'i')
+	else if (*str == 'i')
 		ft_putnbr_pf(va_arg(args, int), i);
-	if (*str == 'd')
+	else if (*str == 'd')
 		ft_putnbr_pf(va_arg(args, int), i);
-	if (*str == 's')
+	else if (*str == 's')
 		ft_putstr_pf(va_arg(args, char *), i);
-	if (*str == 'u')
+	else if (*str == 'u')
 		ft_putunbr_pf(va_arg(args, unsigned int), i);
-	if (*str == 'x')
+	else if (*str == 'x')
 		ft_puthex_pf(va_arg(args, unsigned int), i);
-	if (*str == 'X')
+	else if (*str == 'X')
 		ft_puthexmayus_pf(va_arg(args, unsigned int), i);
-	if (*str == 'p')
+	else if (*str == 'p')
 		ft_puntero_pf(va_arg(args, void *), i);
 	else if (*str == '%')
 		ft_putchar_pf(*str, i);

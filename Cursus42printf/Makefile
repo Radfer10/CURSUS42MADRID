@@ -6,7 +6,7 @@
 #    By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/22 20:05:42 by rde-migu          #+#    #+#              #
-#    Updated: 2024/02/27 16:59:10 by rde-migu         ###   ########.fr        #
+#    Updated: 2024/03/08 17:59:00 by rde-migu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,6 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 
-re: flcen all
+re: fclean all
 
 .PHONY: clean fclean re
