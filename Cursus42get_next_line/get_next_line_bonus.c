@@ -6,49 +6,50 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 17:42:27 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/03/21 21:09:01 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/03/26 21:50:10 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char	*initialize_buffer(char *buffer)
+void	ft_read(int fd, char *buf, char **buffer)
 {
-	if (!buffer)
-	{
-		buffer = (char *)malloc(sizeof(char));
-		if (!buffer)
-			return (NULL);
-		buffer[0] = '\0';
-	}
-	return (buffer);
-}
-
-char	*ft_read_text(int fd, char **buffer)
-{
-	char	buf[BUFFER_SIZE + 1];
-	int		readbyte;
 	char	*temp;
+	int		readbytes;
 
-	readbyte = 1;
-	while (readbyte > 0)
+	readbytes = 1;
+	while (readbytes > 0)
 	{
-		readbyte = read(fd, buf, BUFFER_SIZE);
-		if (readbyte == -1 || readbyte == 0)
+		readbytes = read(fd, buf, BUFFER_SIZE);
+		if (readbytes == -1 || readbytes == 0)
 			break ;
-		buf[readbyte] = '\0';
+		buf[readbytes] = '\0';
 		temp = ft_strjoin(*buffer, buf);
 		free(*buffer);
 		*buffer = temp;
 		if (ft_strchr(buf, '\n'))
 			break ;
 	}
-	if (!*buffer || **buffer == '\0')
+}
+
+char	*ft_read_text(int fd, char *buffer)
+{
+	char	*buf;
+
+	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buf)
 	{
-		free(*buffer);
+		free(buffer);
 		return (NULL);
 	}
-	return (*buffer);
+	ft_read(fd, buf, &buffer);
+	free(buf);
+	if (buffer && buffer[0] == '\0')
+	{
+		free(buffer);
+		return (NULL);
+	}
+	return (buffer);
 }
 
 char	*ft_get_line(char *buffer)
@@ -73,33 +74,32 @@ char	*ft_get_line(char *buffer)
 	return (line);
 }
 
-char	*ft_next_line(char *buffer)
+char	*ft_next_line(char **buffer)
 {
-	int		j;
 	int		i;
 	char	*rest;
 
 	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
+	while ((*buffer)[i] && (*buffer)[i] != '\n')
 		i++;
-	if (!buffer[i])
+	if (!(*buffer)[i])
 	{
-		free(buffer);
+		free(*buffer);
+		*buffer = NULL;
 		return (NULL);
 	}
-	rest = (char *)malloc((ft_strlen(buffer) - i + 1) * sizeof(char));
+	rest = (char *)malloc((ft_strlen(*buffer) - i + 1) * sizeof(char));
 	if (!rest)
 	{
-		free(buffer);
+		free(*buffer);
+		*buffer = NULL;
 		return (NULL);
 	}
 	i++;
-	j = 0;
-	while (buffer[i])
-		rest[j++] = buffer[i++];
-	rest[j] = '\0';
-	free(buffer);
-	return (rest);
+	ft_strlcpy(rest, &((*buffer)[i]), ft_strlen(*buffer) - i + 1);
+	free(*buffer);
+	*buffer = rest;
+	return (*buffer);
 }
 
 char	*get_next_line(int fd)
@@ -116,7 +116,7 @@ char	*get_next_line(int fd)
 	buffer[fd] = initialize_buffer(buffer[fd]);
 	if (!buffer[fd])
 		return (NULL);
-	buffer[fd] = ft_read_text(fd, &buffer[fd]);
+	buffer[fd] = ft_read_text(fd, buffer[fd]);
 	if (!buffer[fd])
 		return (NULL);
 	line = ft_get_line(buffer[fd]);
@@ -125,7 +125,7 @@ char	*get_next_line(int fd)
 		buffer[fd] = NULL;
 		return (NULL);
 	}
-	buffer[fd] = ft_next_line(buffer[fd]);
+	buffer[fd] = ft_next_line(&buffer[fd]);
 	return (line);
 }
 

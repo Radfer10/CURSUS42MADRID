@@ -5,50 +5,53 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/29 18:03:26 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/03/21 23:04:47 by rde-migu         ###   ########.fr       */
+/*   Created: 2024/04/01 23:55:50 by rde-migu          #+#    #+#             */
+/*   Updated: 2024/04/02 19:05:03 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*initialize_buffer(char *buffer)
+void	ft_read(int fd, char *buf, char **buffer)
 {
-	if (!buffer)
-	{
-		buffer = (char *)malloc(sizeof(char));
-		if (!buffer)
-			return (NULL);
-		buffer[0] = '\0';
-	}
-	return (buffer);
-}
-
-char	*ft_read_text(int fd, char **buffer)
-{
-	char	buf[BUFFER_SIZE + 1];
-	int		readbyte;
 	char	*temp;
+	int		readbytes;
 
-	readbyte = 1;
-	while (readbyte > 0)
+	readbytes = 1;
+	if (ft_strchr(*buffer, '\n'))
+		return ;
+	while (readbytes > 0)
 	{
-		readbyte = read(fd, buf, BUFFER_SIZE);
-		if (readbyte == -1 || readbyte == 0)
-			break ;
-		buf[readbyte] = '\0';
+		readbytes = read(fd, buf, BUFFER_SIZE);
+		if (readbytes == -1 || readbytes == 0)
+			return ;
+		buf[readbytes] = '\0';
 		temp = ft_strjoin(*buffer, buf);
 		free(*buffer);
 		*buffer = temp;
 		if (ft_strchr(buf, '\n'))
 			break ;
 	}
-	if (!*buffer || **buffer == '\0')
+}
+
+char	*ft_read_text(int fd, char *buffer)
+{
+	char	*buf;
+
+	buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buf)
 	{
-		free(*buffer);
+		free(buffer);
 		return (NULL);
 	}
-	return (*buffer);
+	ft_read(fd, buf, &buffer);
+	free(buf);
+	if (buffer && buffer[0] == '\0')
+	{
+		free(buffer);
+		return (NULL);
+	}
+	return (buffer);
 }
 
 char	*ft_get_line(char *buffer)
@@ -73,32 +76,32 @@ char	*ft_get_line(char *buffer)
 	return (line);
 }
 
-char	*ft_next_line(char *buffer)
+char	*ft_next_line(char **buffer)
 {
-	int		j;
 	int		i;
 	char	*rest;
 
 	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
+	while ((*buffer)[i] && (*buffer)[i] != '\n')
 		i++;
-	if (!buffer[i])
+	if (!(*buffer)[i])
 	{
-		return (free(buffer), buffer = NULL, NULL);
+		free(*buffer);
+		*buffer = NULL;
+		return (NULL);
 	}
-	rest = (char *)malloc((ft_strlen(buffer) - i + 1) * sizeof(char));
+	rest = (char *)malloc((ft_strlen(*buffer) - i + 1) * sizeof(char));
 	if (!rest)
 	{
-		free(buffer);
+		free(*buffer);
+		*buffer = NULL;
 		return (NULL);
 	}
 	i++;
-	j = 0;
-	while (buffer[i])
-		rest[j++] = buffer[i++];
-	rest[j] = '\0';
-	free(buffer);
-	return (rest);
+	ft_strlcpy(rest, &((*buffer)[i]), ft_strlen(*buffer) - i + 1);
+	free(*buffer);
+	*buffer = rest;
+	return (*buffer);
 }
 
 char	*get_next_line(int fd)
@@ -115,7 +118,7 @@ char	*get_next_line(int fd)
 	buffer = initialize_buffer(buffer);
 	if (!buffer)
 		return (NULL);
-	buffer = ft_read_text(fd, &buffer);
+	buffer = ft_read_text(fd, buffer);
 	if (!buffer)
 		return (NULL);
 	line = ft_get_line(buffer);
@@ -124,30 +127,33 @@ char	*get_next_line(int fd)
 		buffer = NULL;
 		return (NULL);
 	}
-	buffer = ft_next_line(buffer);
+	buffer = ft_next_line(&buffer);
 	return (line);
 }
-
-/*int	main(void)
+/*void leaks(void)
 {
-	int	i;
-	int fd;
-	char *next_line;
-	
-	i = 15;
-	fd = open("1char.txt", O_RDONLY);
+	system ("leaks a.out");
+}*/
 
-	if (fd == -1)
-	{
-		printf("Error");
-		return (1);
-	}
-	while (i--)
-	{
-		next_line = get_next_line(fd);
-		printf("%s\n", next_line);
-		free(next_line);
-		next_line = NULL;
-	}
-	return (0);
+/*int main(void)
+{
+    int fd;
+    char    *next_line;
+	atexit(leaks);
+    fd = open("pr.txt", O_RDONLY);
+    if (fd == -1)
+    {
+        printf("Error");
+        return (1);
+    }
+
+    while ((next_line = get_next_line(fd)) != NULL)
+    {
+        printf("%s\n", next_line);
+        free(next_line);
+        next_line = NULL;
+    }
+
+    close(fd);
+    return (0);
 }*/
