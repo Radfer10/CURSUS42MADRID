@@ -2,7 +2,7 @@ NAME := so_long
 
 CC := gcc
 
-CFLAGS := -Wall -Wextra -Werror -Iheaders/
+CFLAGS := -g3 -Wall -Wextra -Werror -Iheaders/
 
 SOURCE := source/*.c
 GETNEXTLINE := get_next_line/*c

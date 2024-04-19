@@ -1,60 +1,90 @@
 #include "../includes/so_long.h"
 
-static int  width_of_map(char *str)
+static int	width_of_map(char *str)
 {
-    int whidthmap;
+	int	widthmap;
 
-    whidthmap = 0;
-    while (str[whidthmap] != '\0')
-                whidthmap++;
-    if (str[whidthmap] == '\n')
-                whidthmap--;
-    return (whidthmap);
+	widthmap = 0;
+	while (str[widthmap] != '\0')
+		widthmap++;
+	if (str[widthmap - 1] == '\n')
+		widthmap--;
+	return (widthmap);
 }
 
-static int  add_line(t_info_game *game, char *line)
-{
-    char    **temp;
-    int     i;
-
+static int add_line(t_info_game *game, char *line) {
     if (!line)
-        return (0);
+        return 0;
+
+    int length = strlen(line);
+    if (length > 0 && line[length - 1] == '\n')
+        line[length - 1] = '\0';
     
-    temp = malloc((game->height + 1) * sizeof(char *));
-    if (!temp)
-        return (0);
-    
-    i = 0;
-    while (i < game->height)
-    {
+    game->height++;
+
+    char **temp = malloc(game->height * sizeof(char *));
+    if (!temp) {
+        game->height--;
+        return 0;
+    }
+
+    int i = 0;
+    while (i < game->height - 1) {
         temp[i] = game->map[i];
         i++;
     }
-    temp[game->height++] = line;
+
+    temp[game->height - 1] = strdup(line);
+    if (!temp[game->height - 1]) {
+        i = 0;
+        while (i < game->height - 1) {
+            free(temp[i]);
+            i++;
+        }
+        free(temp);
+        game->height--;
+        return 0;
+    }
+
     free(game->map);
     game->map = temp;
-    return (1);
+
+    game->width = width_of_map(game->map[0]);
+
+    return 1;
 }
 
-int map_reading(t_info_game *game, char **argv)
-{
-    char    *readmap;
+
+int map_reading(t_info_game *game, char **argv) {
+    char *readmap;
     
     game->fd = open(argv[1], O_RDONLY);
     if (game->fd < 0)
-        return (0);
-    
-    while ((readmap = get_next_line(game->fd)))
+        return 0;
+
+    // Inicializar el juego con una altura de 0 y ancho desconocido
+    /*game->height = 0;
+    game->width = 0;
+    game->map = NULL;*/
+
+    while ((readmap = get_next_line(game->fd))) 
     {
-        if (!add_line(game, readmap))
-        {
-            printf("Error al agregar una linea al mapa\n");
+        add_line(game, readmap);
+        if (game->map == NULL) {
+            printf("Error al agregar una línea al mapa\n");
             close(game->fd);
-            return (0);
+            return 0;
         }
-        game->height++;
     }
     close(game->fd);
-    game->width = width_of_map(game->map[0]);
-    return (1);
+
+    
+
+    /*printf("Ancho del mapa: %d\n", game->width); 
+    printf("Altura delmapa: %d\n", game->height);*/
+    return 1;
 }
+
+
+
+

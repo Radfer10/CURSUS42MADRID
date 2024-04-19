@@ -6,45 +6,38 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 18:40:30 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/04/11 23:16:48 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/04/19 19:39:43 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-/*int main()
-{
+int main(int argc, char **argv) {
+    
     t_info_game game;
+    ft_init_values(&game);
 
-    if (argc != 2)
-            return (0);
-    ft_memset (&game, 0, sizeof(t_info_game));
-    map_reading(&game, argv);
+    if (argc != 2) {
+        printf("Uso: %s <mapa>\n", argv[0]);
+        return 1;
+    }
+    if (!map_reading(&game, argv)) {
+        printf("Error al abrir el mapa\n");
+        return 1;
+    }
+    find_player_and_exit(&game);
+    find_item_positions(&game);
+    if (!validate_map(&game)) {
+        printf("Error: el mapa no es válido\n");
+        return 1;
+    }
     check_parseo(&game);
     game.mlx = mlx_init();
-    game.window = mlx_new_window(game.mlx, (game.width * 40), (game.height * 40), "solong");
+    game.window = mlx_new_window(game.mlx, (game.width * TITLE_SIZE), (game.height * TITLE_SIZE), "solong");
+    place_sprites(&game);
+    add_sprites(&game);
+    mlx_key_hook(game.window, detect_control, &game);
+    mlx_hook(game.window, 17, 0, (void *)exit, 0);
     mlx_loop(game.mlx);
-}*/
-
-int main(int argc, char **argv)
-{
-    t_info_game game;
-
-    if (argc != 2)
-        return (0);
-
-    ft_memset(&game, 0, sizeof(t_info_game));
-    map_reading(&game, argv);
-    if (!map_reading(&game, argv))
-    {
-        printf("Error al abrir el mapa\n");
-        return (1);
-    }
-    /*place_sprites(&game);
-    add_sprites(&game);*/
-    int window_width = game.width * 40;
-    int window_height = game.height * 40;
-    game.mlx = mlx_init(); 
-    game.window = mlx_new_window(game.mlx, window_width, window_height, "solong");
-    mlx_loop(game.mlx);
+    return (0);
 }
