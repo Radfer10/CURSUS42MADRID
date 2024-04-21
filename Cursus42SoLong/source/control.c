@@ -1,5 +1,15 @@
 #include "../includes/so_long.h"
 
+void	print_moves_(t_info_game *map)
+{
+	char	*str;
+
+	str = ft_itoa(map->moves);
+	mlx_string_put(map->mlx, map->window, 10, 27, 0xFFFFFF, "Moves: ");
+	mlx_string_put(map->mlx, map->window, 75, 27, 0xFFFFFF, str);
+	free(str);
+}
+
 void move_player(t_info_game *game, int position_y, int position_x)
 {
     int next_y = game->y + position_y;
@@ -43,8 +53,10 @@ void move_player(t_info_game *game, int position_y, int position_x)
     game->y = next_y;
     game->x = next_x;
     game->moves++;
+    choose_player(game, position_y, position_x);
     printf("%d\n", game->moves);
     add_sprites(game);
+    print_moves_(game);
 
     
 }
@@ -71,3 +83,4 @@ int detect_control(int key, t_info_game *game)
     ft_movement(key, game);
     return (0);
 }
+

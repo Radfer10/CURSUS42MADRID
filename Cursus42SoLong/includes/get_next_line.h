@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:01:50 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/04/02 18:41:54 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/04/21 00:45:51 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "../libft/libft.h"
 
 char	*get_next_line(int fd);
-char	*ft_strjoin(char const *s1, char const *s2);
+/*char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *str);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);*/
 char	*initialize_buffer(char *buffer);
 void	ft_read(int fd, char *buf, char **buffer);
 char	*ft_read_text(int fd, char *buffer);

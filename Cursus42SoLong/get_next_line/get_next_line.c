@@ -6,11 +6,12 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 23:55:50 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/04/10 23:52:58 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/04/21 00:47:33 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/get_next_line.h"
+#include "../libft/libft.h"
 
 void	ft_read(int fd, char *buf, char **buffer)
 {

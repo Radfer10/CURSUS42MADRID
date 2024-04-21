@@ -76,6 +76,20 @@ void add_sprites(t_info_game *game)
         heightmap++;
     }
 }
-
+void    choose_player(t_info_game *game, int position_y, int position_x)
+{
+	if (position_y == 1)
+		game->dir = "./sprites/Player.xpm";
+	if (position_y == -1)
+		game->dir = "./sprites/Player_Up.xpm";
+	if (position_x == 1)
+		game->dir = "./sprites/Player_Right.xpm";
+	if (position_x == -1)
+		game->dir = "./sprites/Player_Left.xpm";
+	game->player_ptr = mlx_xpm_file_to_image(game->mlx, game->dir,
+			&game->game_width, &game->game_height);
+	if (game->player_ptr == NULL)
+		return (perror("Error: file couldn't be open"), exit(2));
+}
 
 

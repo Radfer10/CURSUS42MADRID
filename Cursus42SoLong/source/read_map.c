@@ -16,7 +16,7 @@ static int add_line(t_info_game *game, char *line) {
     if (!line)
         return 0;
 
-    int length = strlen(line);
+    int length = ft_strlen(line);
     if (length > 0 && line[length - 1] == '\n')
         line[length - 1] = '\0';
     
@@ -34,7 +34,7 @@ static int add_line(t_info_game *game, char *line) {
         i++;
     }
 
-    temp[game->height - 1] = strdup(line);
+    temp[game->height - 1] = ft_strdup(line);
     if (!temp[game->height - 1]) {
         i = 0;
         while (i < game->height - 1) {
