@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_pf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 12:44:23 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/04/11 18:54:04 by rde-migu         ###   ########.fr       */
+/*   Created: 2024/02/23 17:45:03 by rde-migu          #+#    #+#             */
+/*   Updated: 2024/03/08 14:37:56 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "ft_printf.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+void	ft_putstr_pf(char *str, int *len)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (i < len)
+	if (!str)
+		str = "(null)";
+	while (str[i] != '\0')
 	{
-		((unsigned char *)b)[i] = c;
+		write(1, &str[i], 1);
 		i++;
+		(*len)++;
 	}
-	return (b);
 }
-/*int main()
-{
-	char	str[20];
-	size_t	i = 0;
-	ft_memset(str, '1', 10);
-	printf("%s\n", str);
-	return (0);
-}*/

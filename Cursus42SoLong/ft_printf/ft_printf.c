@@ -6,11 +6,11 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:17:04 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/04/11 19:04:32 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/03/08 18:02:34 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*#include "../includes/ft_printf.h"
+#include "ft_printf.h"
 
 void	ft_format(va_list args, const char *str, int *i)
 {
@@ -57,7 +57,7 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return (len);
 }
-int main() {
+/*int main() {
 	int	nb = 1;
     int num = 123;
 	const char c = 'A';

@@ -6,11 +6,11 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:06:19 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/04/11 19:02:55 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:46:28 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*#ifndef FT_PRINTF_H
+#ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
 # include <stdarg.h>
@@ -28,4 +28,4 @@ void	ft_putunbr_pf(unsigned int n, int *i);
 void	ft_puthex_pf(unsigned int n, int *i);
 void	ft_puthexmayus_pf(unsigned int n, int *i);
 void	ft_puntero_pf(void *ptr, int *i);
-#endif*/
+#endif

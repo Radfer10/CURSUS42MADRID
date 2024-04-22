@@ -26,6 +26,7 @@
 # include "get_next_line.h"
 # include <string.h>
 # include "../libft/libft.h"
+# include "../ft_printf/ft_printf.h"
 
 
 
@@ -82,7 +83,6 @@ void find_item_positions(t_info_game *game);
 int validate_map(t_info_game *game);
 void	print_moves_screen(t_info_game *map);
 void    choose_player(t_info_game *game, int position_y, int position_x);
-
 
 #endif
 

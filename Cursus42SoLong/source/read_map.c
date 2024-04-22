@@ -71,7 +71,7 @@ int map_reading(t_info_game *game, char **argv) {
     {
         add_line(game, readmap);
         if (game->map == NULL) {
-            printf("Error al agregar una línea al mapa\n");
+            ft_printf("Error al agregar una línea al mapa\n");
             close(game->fd);
             return 0;
         }

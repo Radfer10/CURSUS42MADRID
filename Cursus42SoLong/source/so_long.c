@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 18:40:30 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/04/21 02:56:59 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/04/22 22:15:16 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ int main(int argc, char **argv) {
     ft_init_values(&game);
 
     if (argc != 2) {
-        printf("Uso: %s <mapa>\n", argv[0]);
+        ft_printf("Uso: %s <mapa>\n", argv[0]);
         return 1;
     }
     if (!map_reading(&game, argv)) {
-        printf("Error al abrir el mapa\n");
+        ft_printf("Error al abrir el mapa\n");
         return 1;
     }
     find_player_and_exit(&game);
     find_item_positions(&game);
     if (!validate_map(&game)) {
-        printf("Error: el mapa no es válido\n");
+        ft_printf("Error: el mapa no es válido\n");
         return 1;
     }
     check_parseo(&game);

@@ -24,12 +24,12 @@ void find_player_and_exit(t_info_game *game) {
     }
 
     if (game->player_y == -1 || game->player_x == -1) {
-        printf("Error: no se encontró al jugador en el mapa\n");
+        ft_printf("Error: no se encontró al jugador en el mapa\n");
         exit(EXIT_FAILURE);
     }
 
     if (game->exit_y == -1 || game->exit_x == -1) {
-        printf("Error: No se encontró salida en el mapa\n");
+        ft_printf("Error: No se encontró salida en el mapa\n");
         exit(EXIT_FAILURE);
     }
 }
@@ -37,7 +37,7 @@ void find_player_and_exit(t_info_game *game) {
 void find_item_positions(t_info_game *game) {
     game->item_position = malloc(game->height * game->width * sizeof(*game->item_position));
     if (game->item_position == NULL) {
-        printf("Error: No se pudo asignar memoria para las posiciones de los ítems\n");
+        ft_printf("Error: No se pudo asignar memoria para las posiciones de los ítems\n");
         exit(EXIT_FAILURE);
     }
 
@@ -59,7 +59,7 @@ void find_item_positions(t_info_game *game) {
 char **copy_map(t_info_game *game) {
     char **map_copy = malloc(game->height * sizeof(*map_copy));
     if (map_copy == NULL) {
-        printf("Error: No se pudo asignar memoria para la copia del mapa\n");
+        ft_printf("Error: No se pudo asignar memoria para la copia del mapa\n");
         exit(EXIT_FAILURE);
     }
 
@@ -67,7 +67,7 @@ char **copy_map(t_info_game *game) {
     while (i < game->height) {
         map_copy[i] = malloc(game->width * sizeof(*map_copy[i]));
         if (map_copy[i] == NULL) {
-            printf("Error: No se pudo asignar memoria para la copia del mapa\n");
+            ft_printf("Error: No se pudo asignar memoria para la copia del mapa\n");
             exit(EXIT_FAILURE);
         }
         int j = 0;
@@ -131,7 +131,7 @@ int validate_map(t_info_game *game) {
         int x = 0;
         while (x < game->width) {
             if (game->map[y][x] != '1' && map_copy[y][x] != 'V') {
-                printf("Error: Casilla (%d, %d) inaccesible en el mapa\n", y, x);
+                ft_printf("Error: Casilla (%d, %d) inaccesible en el mapa\n", y, x);
                 free_map_copy(map_copy, game->height);
                 return 0;
             }
@@ -144,7 +144,7 @@ int validate_map(t_info_game *game) {
 
     
     if ((game->map[game->exit_y][game->exit_x] != 'V' && game->map[game->exit_y][game->exit_x] == '1') && !accessible_item) {
-        printf("Error: Salida o item inaccesible en el mapa\n");
+        ft_printf("Error: Salida o item inaccesible en el mapa\n");
         return 0;
     }
 

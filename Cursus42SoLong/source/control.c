@@ -18,27 +18,27 @@ void move_player(t_info_game *game, int position_y, int position_x)
     //printf("game: %d\n", game->item);
     if (next_y < 0 || next_y >= game->height || next_x < 0 || next_x >= game->width) 
     {
-        printf("Error: Movimiento fuera de los límites del mapa.\n");
+        ft_printf("Error: Movimiento fuera de los límites del mapa.\n");
         return;
     }
 
     if (game->map[next_y][next_x] == 'O')
     {
-        printf("your lose!\n");
+        ft_printf("your lose!\n");
         mlx_destroy_window(game->mlx, game->window);
         exit(EXIT_FAILURE);
     }
 
     if (game->map[next_y][next_x] == 'E' && game->item == 0)
     {
-        printf("Congratulations, you win!\n");
+        ft_printf("Congratulations, you win!\n");
         mlx_destroy_window(game->mlx, game->window);
         exit(EXIT_FAILURE);
     }
     
     else if (game->map[next_y][next_x] == '1' || game->map[next_y][next_x] == 'E') 
     {
-        printf("Error: Obstáculo en la siguiente posición.\n");
+        ft_printf("Error: Obstáculo en la siguiente posición.\n");
         return;
     }
 
@@ -54,7 +54,7 @@ void move_player(t_info_game *game, int position_y, int position_x)
     game->x = next_x;
     game->moves++;
     choose_player(game, position_y, position_x);
-    printf("%d\n", game->moves);
+    ft_printf("%d\n", game->moves);
     add_sprites(game);
     print_moves_(game);
 
