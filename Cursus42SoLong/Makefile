@@ -2,7 +2,7 @@ NAME := so_long
 
 CC := gcc
 
-CFLAGS := -g3 -Wall -Wextra -Werror -Iheaders/
+CFLAGS := -Wall -Wextra -Werror
 
 SOURC	:= control.c ft_init_values.c parseo_map.c read_map.c so_long.c textures.c validate_map.c
 SOURCE := $(addprefix ./source/, $(SOURC))
