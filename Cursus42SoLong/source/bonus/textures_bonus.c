@@ -1,6 +1,6 @@
 
-#include "../includes/so_long.h"
 
+#include "../../includes/so_long_bonus.h"
 void place_player(t_info_game *game, int heightmap, int widthmap)
 {
     mlx_put_image_to_window(game->mlx, game->window, game->player_ptr, widthmap * TITLE_SIZE, heightmap * TITLE_SIZE);
@@ -29,6 +29,10 @@ void place_sprites(t_info_game *game)
         if (game->wall == NULL)
         return (perror("Error: file couldn't be open"), exit(2));
     /*printf("wall\n width:%d, height:%d", i, j);*/
+    game->enemy_ptr = mlx_xpm_file_to_image(game->mlx, "sprites/enemy.xpm", &i, &j);
+    /*printf("enemy\n width:%d, height:%d", i, j);*/
+        if (game->enemy_ptr == NULL)
+        return (perror("Error: file couldn't be open"), exit(2));
     game->exit_ptr = mlx_xpm_file_to_image(game->mlx, "sprites/exit.xpm", &i, &j);
         if (game->exit_ptr == NULL)
         return (perror("Error: file couldn't be open"), exit(2));
@@ -72,6 +76,20 @@ void add_sprites(t_info_game *game)
         heightmap++;
     }
 }
-
+void    choose_player(t_info_game *game, int position_y, int position_x)
+{
+	if (position_y == 1)
+		game->dir = "./sprites/Player.xpm";
+	if (position_y == -1)
+		game->dir = "./sprites/Player_Up.xpm";
+	if (position_x == 1)
+		game->dir = "./sprites/Player_Right.xpm";
+	if (position_x == -1)
+		game->dir = "./sprites/Player_Left.xpm";
+	game->player_ptr = mlx_xpm_file_to_image(game->mlx, game->dir,
+			&game->game_width, &game->game_height);
+	if (game->player_ptr == NULL)
+		return (perror("Error: file couldn't be open"), exit(2));
+}
 
 

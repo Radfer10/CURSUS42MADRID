@@ -1,12 +1,17 @@
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # define TITLE_SIZE 64
 
-# define PLAYER     "./sprites/player.xpm"
+
+# define ENEMY      "./sprites/enemy.xpm"
 # define FLOOR      "./sprites/floor.xpm"
 # define WALL       "./sprites/wall.xpm"
 # define EXIT       "./sprites/exit.xpm"
+# define PLAYER_DWON "./sprites/player.xpm"
+# define PLAYER_UP   "./sprites/player_up.xpm"
+# define PLAYER_LEFT "./sprites/player_left.xpm"
+# define PLAYER_RIGHT "./sprites/player_right.xpm"
 
 # define LEFT 0
 # define RIGHT 2
@@ -69,7 +74,7 @@ typedef struct t_start{
 
 
 
-void	*ft_memset(void *b, int c, size_t len);
+
 int map_reading(t_info_game *game, char **argv);
 void place_sprites(t_info_game *game);
 void add_sprites(t_info_game *game);
@@ -80,5 +85,10 @@ int detect_control(int key, t_info_game *game);
 void find_player_and_exit(t_info_game *game);
 void find_item_positions(t_info_game *game);
 int validate_map(t_info_game *game);
+void	print_moves_screen(t_info_game *map);
+void    choose_player(t_info_game *game, int position_y, int position_x);
 
 #endif
+
+
+
