@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:01:50 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/04/21 00:45:51 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/04/26 00:06:59 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #  define BUFFER_SIZE 10
 # endif
 
+# include "../libft/libft.h"
 # include <fcntl.h>
 # include <limits.h>
 # include <stdarg.h>
@@ -24,7 +25,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "../libft/libft.h"
 
 char	*get_next_line(int fd);
 /*char	*ft_strjoin(char const *s1, char const *s2);

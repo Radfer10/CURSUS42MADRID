@@ -1,13 +1,25 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/04/24 20:12:43 by rde-migu          #+#    #+#              #
+#    Updated: 2024/04/26 00:02:04 by rde-migu         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME := so_long
 
 CC := gcc
 
 CFLAGS := -Wall -Wextra -Werror
 
-SOURC	:= control.c ft_init_values.c parseo_map.c read_map.c so_long.c textures.c validate_map.c
+SOURC	:= control.c ft_init_values.c parseo_map.c read_map.c so_long.c textures.c find_caracters.c duplicate.c validate_map.c
 SOURCE := $(addprefix ./source/, $(SOURC))
 OBJECTS := $(SOURCE:.c=.o)
-BON	:= control_bonus.c ft_init_values_bonus.c parseo_map_bonus.c read_map_bonus.c so_long_bonus.c textures_bonus.c validate_map_bonus.c
+BON	:= control_bonus.c ft_init_values_bonus.c parseo_map_bonus.c read_map_bonus.c so_long_bonus.c textures_bonus.c find_caracters_bonus.c duplicate_map_bonus.c validate_map_bonus.c
 BONUS := $(addprefix ./source/bonus/, $(BON))
 BONUS_OBJ := $(BONUS:.c=.o)
 GETNEXTLINE := get_next_line/*.c
@@ -27,7 +39,7 @@ $(NAME): $(LIBFT) $(PRINTF) $(OBJECTS)
 
 bonus: $(BONUS_OBJ) $(LIBFT) $(PRINTF)
 	@make -C libft
-	@$(CC) $(CFLAGS) $(BONUS_OBJ) $(GETNEXTLINE) $(LIBFT) $(PRINTF) $(LIBRARY) -o so_long_bonus
+	@$(CC) $(CFLAGS) $(BONUS_OBJ) $(GETNEXTLINE) $(LIBFT) $(PRINTF) $(LIBRARY) -o $(NAME)
 
 $(LIBFT):
 	make -C libft
