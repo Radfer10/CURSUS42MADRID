@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 20:05:25 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/05/10 18:27:53 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/05/10 18:34:22 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,46 +266,7 @@ void	sort_stack(t_push_swap *push_swap)
 	}
 }
 
-int maxm(t_stack *stack)
-{
-    int max = stack->content;
-    while (stack != NULL)
-    {
-        if (stack->content > max)
-            max = stack->content;
-        stack = stack->next;
-    }
-    return max;
-}
 
-// Función para realizar el ordenamiento por dígitos
-void radixSort(t_stack **stack)
-{
-    int max = maxm(*stack);
-    for (int place = 1; max / place > 0; place *= 10)
-    {
-        t_stack *output = NULL;
-        t_stack *current = *stack;
-        t_stack *prev = NULL;
-
-        while (current != NULL)
-        {
-            int digit = (current->content / place) % 10;
-            if (digit == 0)
-                pa(current);
-            else if (digit == 1)
-                pb(current);
-            // ... (similarly for other digits)
-
-            prev = current;
-            current = current->next;
-            prev->next = output;
-            output = prev;
-        }
-
-        *stack = output;
-    }
-}
 
 // Función para imprimir la pila
 void printStack(t_stack *stack)
