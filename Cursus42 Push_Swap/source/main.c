@@ -254,6 +254,8 @@ void	sort_stack(t_push_swap *push_swap)
 				printf("ra\n");
 
 			}
+	
+			
 		}
 		while (push_swap->b != NULL)
 		{
@@ -262,6 +264,9 @@ void	sort_stack(t_push_swap *push_swap)
 		}
 		
 	}
+	rra(push_swap);
+	sa(push_swap);
+
 }
 
 
