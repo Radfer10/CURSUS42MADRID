@@ -55,20 +55,28 @@ t_stack *stack_last(t_stack *stack)
         return NULL;
     while (stack->next != NULL)
         stack = stack->next;
-    return stack;
+    return (stack);
 }
 
 
-t_stack *add_front_new_stack(int content, t_stack *stack)
+t_stack *add_back_new_stack(int content, t_stack *stack)
 {
 	t_stack *new;
+	t_stack	*item;
 
 	new = malloc(sizeof(t_stack));
 	if (new == 0)
 		return (0);
 	new->content = content;
-	new->next = stack;
-	return (new);
+	new->next = NULL;
+	if (stack != NULL)
+	{
+		item = stack_last(stack);
+		item->next = new;
+	}
+	else
+		stack = new;
+	return (stack);
 }
 
 t_stack *swap(t_stack *stack)
@@ -119,10 +127,8 @@ void	pa(t_push_swap *push_swap)
 
 void	pb(t_push_swap *push_swap)
 {
-	push(&push_swap->a, &push_swap->b);
+	push(&push_swap->b, &push_swap->a);
 }
-
-
 
 t_stack *reverse_rotate(t_stack *stack)
 {
@@ -217,7 +223,46 @@ void print_push_swap(t_push_swap *push_swap)
 	printf("\n");
 }
 
+t_stack *find_min(t_stack *stack)
+{
+	t_stack *min = stack;
+	while (stack != NULL)
+	{
+		if (stack->content < min->content)
+			min = stack;
+		stack = stack->next;
+	}
+	return min;
+}
 
+void	sort_stack(t_push_swap *push_swap)
+{
+	t_stack	*tmp;
+	if (push_swap->a != NULL)
+	{
+		while (push_swap->a != find_min(push_swap->a))
+		{
+			tmp = find_min(push_swap->a);
+			if (tmp == push_swap->a)
+			{
+				pb(push_swap);
+				printf("pb\n");
+			}
+			else
+			{
+				ra(push_swap);
+				printf("ra\n");
+
+			}
+		}
+		while (push_swap->b != NULL)
+		{
+			pa(push_swap);
+			printf("pa\n");
+		}
+		
+	}
+}
 
 
 int main(int argc, char **argv)
@@ -239,11 +284,12 @@ int main(int argc, char **argv)
 	}
 	while (cont < argc)
 	{
-		push_swap->a = add_front_new_stack(ft_atoi(argv[cont]), push_swap->a);
+		push_swap->a = add_back_new_stack(ft_atoi(argv[cont]), push_swap->a);
 		cont++;
 	}
-	printf("swap\n");
-	push_swap->b = add_front_new_stack(5, push_swap->b);
+	// TODO index funcion
+	/*printf("swap\n");
+	push_swap->b = add_back_new_stack(5, push_swap->b);
 	print_push_swap(push_swap);
 	printf("sa\n");
 	sa(push_swap);
@@ -262,6 +308,12 @@ int main(int argc, char **argv)
 	print_push_swap(push_swap);
 	printf("rra\n");
 	rra(push_swap);
+	print_push_swap(push_swap);*/
+	printf("Stack inicial:\n");
+	print_push_swap(push_swap);
+	printf("Ordenando...\n");
+	sort_stack(push_swap);
+	printf("Sttack ordenado:\n");
 	print_push_swap(push_swap);
 	return (0);
 }

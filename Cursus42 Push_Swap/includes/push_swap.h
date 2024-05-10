@@ -18,13 +18,14 @@
 # include <unistd.h>
 # include "../libft/libft.h"
 
-typedef struct stack
+typedef struct s_stack
 {
-    int     content;
-    struct  stack *next;
+    int             content;
+    unsigned int    index;
+    struct  s_stack *next;
 }   t_stack;
 
-typedef struct push_swap
+typedef struct s_push_swap
 {
     t_stack *a;
     t_stack *b;
