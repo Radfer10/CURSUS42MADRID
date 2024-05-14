@@ -49,6 +49,28 @@ int	ft_atoi(const char *str)
 	return (num * sign);
 }
 
+
+
+bool is_sorted(t_stack *stack) {
+    if (stack == NULL || stack->next == NULL) {
+        // Si el stack está vacío o tiene solo un elemento, está ordenado
+        return true;
+    }
+
+    // Recorremos el stack y comprobamos si cada elemento es menor o igual que el siguiente
+    while (stack->next != NULL) {
+        if (stack->content > stack->next->content) {
+            // Si encontramos un elemento mayor que el siguiente, el stack no está ordenado
+            return false;
+        }
+        stack = stack->next;
+    }
+
+    // Si llegamos al final del stack sin encontrar ningún problema, está ordenado
+    return true;
+}
+
+
 t_stack *stack_last(t_stack *stack)
 {
     if (stack == NULL)
@@ -235,6 +257,129 @@ t_stack *find_min(t_stack *stack)
 	return min;
 }
 
+void sort_2(t_push_swap *push_swap)
+{
+    if (push_swap->a != NULL)
+    {
+        t_stack *node;
+
+		if (is_sorted(push_swap->a))
+			return;
+
+        node = push_swap->a;
+        if (node->next != NULL)
+        {
+            if (node->content > node->next->content)
+                sa(push_swap);
+        }
+    }
+
+}
+
+void sort_3(t_push_swap *push_swap)
+{
+    if (push_swap->a != NULL)
+    {
+        t_stack *first_node;
+        t_stack *second_node;
+        t_stack *third_node;
+
+		if (is_sorted(push_swap->a))
+			return;
+
+        first_node = push_swap->a;
+        second_node = push_swap->a->next;
+        third_node = push_swap->a->next->next;
+
+        if (first_node->content > second_node->content && first_node->content > third_node->content)
+            ra(push_swap);
+        else if (second_node->content > first_node->content && second_node->content > third_node->content)
+            rra(push_swap);
+        
+        if (push_swap->a->content > push_swap->a->next->content)
+            sa(push_swap);
+    }
+}
+
+void sort_4(t_push_swap *push_swap)
+{
+    if (push_swap->a != NULL)
+    {
+        t_stack *node;
+        t_stack *min_node;
+	if (!is_sorted(push_swap->a))
+		return;
+
+        min_node = find_min(push_swap->a); // Encontramos el nodo mínimo en la pila `a`
+
+        if (min_node != NULL)
+        {
+            // Movemos el nodo mínimo al principio de la pila `a`
+            while (push_swap->a != min_node)
+            {
+                if (push_swap->a->next == min_node)
+                {
+                    sa(push_swap); // Si el siguiente nodo es el mínimo, intercambiamos los dos nodos
+                    break;
+                }
+                ra(push_swap); // Rotamos hacia arriba hasta que el nodo mínimo esté al principio
+            }
+
+            pb(push_swap); // Movemos el nodo mínimo a la pila `b`
+
+            // Ordenamos la pila `a` sin utilizar sort3
+            if (push_swap->a != NULL && push_swap->a->content > push_swap->a->next->content)
+                sa(push_swap);
+
+            // Ordenamos la pila `a` utilizando sort3
+            sort_3(push_swap);
+
+            pa(push_swap); // Movemos el nodo mínimo de la pila `b` a la pila `a`
+        }
+    }
+}
+
+void sort_5(t_push_swap *push_swap)
+{
+    if (push_swap == NULL || push_swap->a == NULL)
+        return;
+
+    t_stack *min_node = find_min(push_swap->a); // Encontramos el nodo mínimo en la pila `a`
+
+	if (is_sorted(push_swap->a))
+		return;
+
+    if (min_node == NULL)
+        return;
+
+    // Movemos el nodo mínimo al principio de la pila `a`
+    while (push_swap->a != min_node)
+    {
+        if (push_swap->a->next == min_node)
+        {
+            sa(push_swap); // Si el siguiente nodo es el mínimo, intercambiamos los dos nodos
+            break;
+        }
+        ra(push_swap); // Rotamos hacia arriba hasta que el nodo mínimo esté al principio
+    }
+
+    pb(push_swap); // Movemos el nodo mínimo a la pila `b`
+
+    // Ordenamos la pila `a` sin utilizar sort4
+    if (push_swap->a != NULL && push_swap->a->content > push_swap->a->next->content)
+        sa(push_swap);
+
+    // Ordenamos la pila `a` utilizando sort4
+    sort_4(push_swap);
+
+    pa(push_swap); // Movemos el nodo mínimo de la pila `b` a la pila `a`
+}
+
+
+
+
+
+
 void	sort_stack(t_push_swap *push_swap)
 {
 	
@@ -326,7 +471,7 @@ int main(int argc, char **argv)
 	printf("Stack inicial:\n");
 	print_push_swap(push_swap);
 	printf("Ordenando...\n");
-	sort_stack(push_swap);
+	sort_5(push_swap);
 	printf("Sttack ordenado:\n");
 	print_push_swap(push_swap);
 	return (0);
