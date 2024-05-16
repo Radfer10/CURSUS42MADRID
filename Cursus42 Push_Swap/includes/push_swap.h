@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 17:16:27 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/05/07 19:22:00 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:52:20 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 typedef struct s_stack
 {
-    int             content;
+    int            content;
     unsigned int    index;
     struct  s_stack *next;
 }   t_stack;

@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 20:05:25 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/05/10 18:34:22 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/05/14 21:07:20 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,83 +301,133 @@ void sort_3(t_push_swap *push_swap)
     }
 }
 
-void sort_4(t_push_swap *push_swap)
-{
-    if (push_swap->a != NULL)
-    {
-        t_stack *node;
-        t_stack *min_node;
-	if (!is_sorted(push_swap->a))
-		return;
+void sort_4(t_push_swap *push_swap) {
+    if (is_sorted(push_swap->a))
+        return;
 
-        min_node = find_min(push_swap->a); // Encontramos el nodo mínimo en la pila `a`
+    t_stack *min_node = find_min(push_swap->a);
 
-        if (min_node != NULL)
-        {
-            // Movemos el nodo mínimo al principio de la pila `a`
-            while (push_swap->a != min_node)
-            {
-                if (push_swap->a->next == min_node)
-                {
-                    sa(push_swap); // Si el siguiente nodo es el mínimo, intercambiamos los dos nodos
-                    break;
-                }
-                ra(push_swap); // Rotamos hacia arriba hasta que el nodo mínimo esté al principio
-            }
-
-            pb(push_swap); // Movemos el nodo mínimo a la pila `b`
-
-            // Ordenamos la pila `a` sin utilizar sort3
-            if (push_swap->a != NULL && push_swap->a->content > push_swap->a->next->content)
-                sa(push_swap);
-
-            // Ordenamos la pila `a` utilizando sort3
-            sort_3(push_swap);
-
-            pa(push_swap); // Movemos el nodo mínimo de la pila `b` a la pila `a`
-        }
+    while (push_swap->a != min_node) {
+        ra(push_swap);
+        printf("ra\n");
     }
+
+    pb(push_swap);
+    printf("pb\n");
+
+    sort_3(push_swap);
+
+    pa(push_swap);
+    printf("pa\n");
 }
 
-void sort_5(t_push_swap *push_swap)
-{
+
+void sort_5(t_push_swap *push_swap) {
     if (push_swap == NULL || push_swap->a == NULL)
         return;
 
-    t_stack *min_node = find_min(push_swap->a); // Encontramos el nodo mínimo en la pila `a`
-
-	if (is_sorted(push_swap->a))
-		return;
-
-    if (min_node == NULL)
+    if (is_sorted(push_swap->a))
         return;
 
-    // Movemos el nodo mínimo al principio de la pila `a`
-    while (push_swap->a != min_node)
-    {
-        if (push_swap->a->next == min_node)
-        {
-            sa(push_swap); // Si el siguiente nodo es el mínimo, intercambiamos los dos nodos
-            break;
-        }
-        ra(push_swap); // Rotamos hacia arriba hasta que el nodo mínimo esté al principio
+    t_stack *min_node = find_min(push_swap->a);
+
+    // Mueve el nodo mínimo a la pila b
+    while (push_swap->a != min_node) {
+        ra(push_swap);
+        printf("ra\n");
     }
+    pb(push_swap);
+    printf("pb\n");
 
-    pb(push_swap); // Movemos el nodo mínimo a la pila `b`
-
-    // Ordenamos la pila `a` sin utilizar sort4
-    if (push_swap->a != NULL && push_swap->a->content > push_swap->a->next->content)
-        sa(push_swap);
-
-    // Ordenamos la pila `a` utilizando sort4
+    // Ordena los 4 elementos restantes
     sort_4(push_swap);
 
-    pa(push_swap); // Movemos el nodo mínimo de la pila `b` a la pila `a`
+    // Mueve el nodo mínimo de vuelta a la pila a
+    pa(push_swap);
+    printf("pa\n");
+
+    // Asegúrate de que la pila a esté ordenada
+    if (push_swap->a->content > push_swap->a->next->content) {
+        sa(push_swap);
+        printf("sa\n");
+    }
 }
 
+int	stack_size(t_stack *stack)
+{
+	int size;
+	
+	size = 0;
+	while (stack)
+	{
+		size++;
+		stack = stack->next;
+	}
+	return size;
+}
 
+void transform_negatives(t_stack *stack)
+{
+	while (stack)
+	{
+		if (stack->content < 0)
+			stack->content = 0;
+		stack = stack->next;
+	}
+}
 
+void sort_radix(t_push_swap *push_swap)
+{
+	int max_bits;
+	t_stack *tmp = push_swap->a;
+	int size = stack_size(push_swap->a);
+	int max_num;
 
+	max_bits = 0;
+	max_num = 0;
+
+	while (tmp)
+	{
+		if (tmp->content > max_num)
+			max_num = tmp->content;
+		tmp = tmp->next;
+	}
+
+	max_num = abs(max_num);
+	
+	while ((max_num >> max_bits) != 0)
+		max_bits++;
+
+	int i = 0;
+	while (i < max_bits)
+	{
+		int j = 0;
+		while (j < size)
+		{
+			int num = push_swap->a->content;
+			if (num < 0)
+			{
+				pb(push_swap);
+				printf("pb\n");
+			}
+			else if (((num >> i) & 1) == 1)
+			{
+				ra(push_swap);
+				printf("ra\n");
+			} else {
+				pb(push_swap);
+				printf("pb\n");
+			}
+			j++;
+		}
+		while (push_swap->b)
+		{
+			pa(push_swap);
+			printf("pa\n");
+		}
+		i++;
+	}
+}
 
 
 void	sort_stack(t_push_swap *push_swap)
@@ -415,7 +465,7 @@ void	sort_stack(t_push_swap *push_swap)
 
 // Función para imprimir la pila
 void printStack(t_stack *stack)
-{
+{	
     while (stack != NULL)
     {
         printf("Content: %d, Index: %u\n", stack->content, stack->index);
@@ -471,7 +521,7 @@ int main(int argc, char **argv)
 	printf("Stack inicial:\n");
 	print_push_swap(push_swap);
 	printf("Ordenando...\n");
-	sort_5(push_swap);
+	sort_radix(push_swap);
 	printf("Sttack ordenado:\n");
 	print_push_swap(push_swap);
 	return (0);
