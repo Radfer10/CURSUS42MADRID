@@ -14,7 +14,6 @@ typedef struct s_push_swap {
     int a_size;
 } t_push_swap;
 
-// Función para contar el número de elementos en una pila
 int stack_size(t_stack *stack) {
     int count = 0;
     while (stack) {
@@ -24,7 +23,6 @@ int stack_size(t_stack *stack) {
     return count;
 }
 
-// Función para encontrar el número máximo en la pila
 int find_max(t_stack *stack) {
     int max = INT_MIN;
     while (stack != NULL) {
@@ -35,7 +33,6 @@ int find_max(t_stack *stack) {
     return max;
 }
 
-// Función para contar el número de bits en un número
 int num_bits(int num) {
     int bits = 0;
     while (num > 0) {
@@ -45,7 +42,6 @@ int num_bits(int num) {
     return bits;
 }
 
-// Función para manipular las pilas
 void pb(t_push_swap *push_swap) {
     t_stack *tmp;
     if (push_swap->a) {
@@ -68,38 +64,57 @@ void pa(t_push_swap *push_swap) {
     }
 }
 
-void ra(t_push_swap *push_swap) {
-    t_stack *tmp;
-    t_stack *first;
-
-    if (push_swap->a && push_swap->a->next) {
-        first = push_swap->a;
-        push_swap->a = push_swap->a->next;
-        first->next = NULL;
-        tmp = push_swap->a;
-        while (tmp->next)
-            tmp = tmp->next;
-        tmp->next = first;
+void rotate(t_stack **stack) {
+    if (!*stack || !(*stack)->next) return;
+    t_stack *temp = *stack;
+    *stack = (*stack)->next;
+    temp->next = NULL;
+    t_stack *current = *stack;
+    while (current->next) {
+        current = current->next;
     }
+    current->next = temp;
 }
 
-void rra(t_push_swap *push_swap) {
-    t_stack *tmp;
-    t_stack *second_last;
-
-    if (push_swap->a && push_swap->a->next) {
-        tmp = push_swap->a;
-        while (tmp->next->next)
-            tmp = tmp->next;
-        second_last = tmp;
-        tmp = tmp->next;
-        second_last->next = NULL;
-        tmp->next = push_swap->a;
-        push_swap->a = tmp;
+void reverse_rotate(t_stack **stack) {
+    if (!*stack || !(*stack)->next) return;
+    t_stack *second_last = NULL;
+    t_stack *last = *stack;
+    while (last->next) {
+        second_last = last;
+        last = last->next;
     }
+    second_last->next = NULL;
+    last->next = *stack;
+    *stack = last;
 }
 
-// Función de burbuja para asignar índices a los elementos del stack
+void swap(t_stack **stack) {
+    if (!*stack || !(*stack)->next) return;
+    t_stack *first = *stack;
+    t_stack *second = (*stack)->next;
+    first->next = second->next;
+    second->next = first;
+    *stack = second;
+}
+
+int is_sorted(t_stack *stack) {
+    while (stack && stack->next) {
+        if (stack->content > stack->next->content) return 0;
+        stack = stack->next;
+    }
+    return 1;
+}
+
+int get_min_index(t_stack *stack) {
+    int min_index = stack->index;
+    while (stack) {
+        if (stack->index < min_index) min_index = stack->index;
+        stack = stack->next;
+    }
+    return min_index;
+}
+
 void bubblesort(t_stack **stack) {
     t_stack *comparer = *stack;
     while (comparer != NULL) {
@@ -120,20 +135,17 @@ static int max_number_of_bits(t_stack *stack) {
     unsigned int max = node->index;
     int number_of_bits = 0;
 
-    // Encuentra el índice máximo en la pila
     while (node) {
         if (node->index > max)
             max = node->index;
         node = node->next;
     }
 
-    // Calcula el número de bits necesarios para representar el índice máximo
     while ((max >> number_of_bits) != 0)
         number_of_bits++;
 
     return number_of_bits;
 }
-
 
 void sorter(t_push_swap *push_swap) {
     t_stack *head_a;
@@ -149,13 +161,10 @@ void sorter(t_push_swap *push_swap) {
         j = 0;
         while (j++ < number_of_nodes) {
             head_a = push_swap->a;
-            if (((head_a->index >> bit_position) & 1) == 1)
-            {
-                ra(push_swap);
+            if (((head_a->index >> bit_position) & 1) == 1) {
+                rotate(&(push_swap->a));
                 printf("ra\n");
-            }
-            else
-            {
+            } else {
                 pb(push_swap);
                 printf("pb\n");
             }
@@ -167,7 +176,73 @@ void sorter(t_push_swap *push_swap) {
     }
 }
 
+int count_r(t_stack *stack, int index) {
+    int count = 0;
+    while (stack && stack->index != index) {
+        stack = stack->next;
+        count++;
+    }
+    return count;
+}
 
+int ft_sqrt(int num) {
+    int sqrt = 0;
+    while (sqrt * sqrt <= num) {
+        sqrt++;
+    }
+    return sqrt - 1;
+}
+
+
+void k_sort1(t_push_swap *push_swap) {
+    int i = 0;
+    int range = ft_sqrt(push_swap->a_size) * 14 / 10;
+
+    while (push_swap->a != NULL) {
+        if (push_swap->a->index <= i) {
+            pb(push_swap);
+            printf("pb\n");
+            rotate(&(push_swap->b));
+            printf("rb\n");
+            i++;
+        } else if (push_swap->a->index <= i + range) {
+            pb(push_swap);
+            printf("pb\n");
+            i++;
+        } else {
+            rotate(&(push_swap->a));
+            printf("ra\n");
+        }
+    }
+}
+
+void k_sort2(t_push_swap *push_swap) {
+    int length = push_swap->a_size;
+    int rb_count;
+    int rrb_count;
+
+    while (length - 1 >= 0) {
+        rb_count = count_r(push_swap->b, length - 1);
+        rrb_count = (length + 3) - rb_count;
+        if (rb_count <= rrb_count) {
+            while (push_swap->b->index != length - 1) {
+                rotate(&(push_swap->b));
+                printf("rb\n");
+            }
+            pa(push_swap);
+            printf("pa\n");
+            length--;
+        } else {
+            while (push_swap->b->index != length - 1) {
+                reverse_rotate(&(push_swap->b));
+                printf("rrb\n");
+            }
+            pa(push_swap);
+            printf("pa\n");
+            length--;
+        }
+    }
+}
 
 // Función para agregar elementos a la pila
 void push(t_stack **stack, int value) {
@@ -187,6 +262,8 @@ void print_stack(t_stack *stack) {
     }
     printf("\n");
 }
+
+
 
 int main(int argc, char *argv[]) {
     if (argc < 2) {
@@ -212,11 +289,13 @@ int main(int argc, char *argv[]) {
 
     bubblesort(&push_swap.a);
 
-    // Ordenar la pila usando Radix Sort
-    sorter(&push_swap);
+    // Ordenar la pila usando K-Sort
+    k_sort1(&push_swap);
+    k_sort2(&push_swap);
 
     printf("Pila ordenada: ");
     print_stack(push_swap.a);
 
     return 0;
 }
+
