@@ -23,25 +23,6 @@ int stack_size(t_stack *stack) {
     return count;
 }
 
-int find_max(t_stack *stack) {
-    int max = INT_MIN;
-    while (stack != NULL) {
-        if (stack->content > max)
-            max = stack->content;
-        stack = stack->next;
-    }
-    return max;
-}
-
-int num_bits(int num) {
-    int bits = 0;
-    while (num > 0) {
-        bits++;
-        num >>= 1;
-    }
-    return bits;
-}
-
 void pb(t_push_swap *push_swap) {
     t_stack *tmp;
     if (push_swap->a) {
@@ -98,84 +79,6 @@ void swap(t_stack **stack) {
     *stack = second;
 }
 
-int is_sorted(t_stack *stack) {
-    while (stack && stack->next) {
-        if (stack->content > stack->next->content) return 0;
-        stack = stack->next;
-    }
-    return 1;
-}
-
-int get_min_index(t_stack *stack) {
-    int min_index = stack->index;
-    while (stack) {
-        if (stack->index < min_index) min_index = stack->index;
-        stack = stack->next;
-    }
-    return min_index;
-}
-
-void bubblesort(t_stack **stack) {
-    t_stack *comparer = *stack;
-    while (comparer != NULL) {
-        t_stack *compared = *stack;
-        int i = 1;
-        while (compared != NULL) {
-            if (comparer->content > compared->content)
-                i++;
-            compared = compared->next;
-        }
-        comparer->index = i;
-        comparer = comparer->next;
-    }
-}
-
-static int max_number_of_bits(t_stack *stack) {
-    t_stack *node = stack;
-    unsigned int max = node->index;
-    int number_of_bits = 0;
-
-    while (node) {
-        if (node->index > max)
-            max = node->index;
-        node = node->next;
-    }
-
-    while ((max >> number_of_bits) != 0)
-        number_of_bits++;
-
-    return number_of_bits;
-}
-
-void sorter(t_push_swap *push_swap) {
-    t_stack *head_a;
-    int bit_position;
-    int j;
-    int number_of_nodes;
-    int number_of_bits;
-
-    bit_position = 0;
-    number_of_nodes = stack_size(push_swap->a);
-    number_of_bits = max_number_of_bits(push_swap->a);
-    while (bit_position < number_of_bits) {
-        j = 0;
-        while (j++ < number_of_nodes) {
-            head_a = push_swap->a;
-            if (((head_a->index >> bit_position) & 1) == 1) {
-                rotate(&(push_swap->a));
-                printf("ra\n");
-            } else {
-                pb(push_swap);
-                printf("pb\n");
-            }
-        }
-        while (push_swap->b != NULL)
-            pa(push_swap);
-        bit_position++;
-        printf("pa\n");
-    }
-}
-
 int count_r(t_stack *stack, int index) {
     int count = 0;
     while (stack && stack->index != index) {
@@ -193,6 +96,20 @@ int ft_sqrt(int num) {
     return sqrt - 1;
 }
 
+void bubblesort(t_stack **stack) {
+    t_stack *comparer = *stack;
+    while (comparer != NULL) {
+        t_stack *compared = *stack;
+        int i = 0;
+        while (compared != NULL) {
+            if (comparer->content > compared->content)
+                i++;
+            compared = compared->next;
+        }
+        comparer->index = i;
+        comparer = comparer->next;
+    }
+}
 
 void k_sort1(t_push_swap *push_swap) {
     int i = 0;
@@ -217,34 +134,31 @@ void k_sort1(t_push_swap *push_swap) {
 }
 
 void k_sort2(t_push_swap *push_swap) {
-    int length = push_swap->a_size;
+    int length = stack_size(push_swap->b);
     int rb_count;
     int rrb_count;
 
-    while (length - 1 >= 0) {
+    while (length > 0) {
         rb_count = count_r(push_swap->b, length - 1);
-        rrb_count = (length + 3) - rb_count;
+        rrb_count = stack_size(push_swap->b) - rb_count;
+
         if (rb_count <= rrb_count) {
             while (push_swap->b->index != length - 1) {
                 rotate(&(push_swap->b));
                 printf("rb\n");
             }
-            pa(push_swap);
-            printf("pa\n");
-            length--;
         } else {
             while (push_swap->b->index != length - 1) {
                 reverse_rotate(&(push_swap->b));
                 printf("rrb\n");
             }
-            pa(push_swap);
-            printf("pa\n");
-            length--;
         }
+        pa(push_swap);
+        printf("pa\n");
+        length--;
     }
 }
 
-// Función para agregar elementos a la pila
 void push(t_stack **stack, int value) {
     t_stack *new_node = malloc(sizeof(t_stack));
     if (!new_node)
@@ -254,7 +168,6 @@ void push(t_stack **stack, int value) {
     *stack = new_node;
 }
 
-// Función para imprimir la pila
 void print_stack(t_stack *stack) {
     while (stack) {
         printf("%d ", stack->content);
@@ -263,21 +176,17 @@ void print_stack(t_stack *stack) {
     printf("\n");
 }
 
-
-
 int main(int argc, char *argv[]) {
     if (argc < 2) {
         printf("Usage: %s [numbers...]\n", argv[0]);
         return 1;
     }
 
-    // Crear la estructura push_swap y inicializar las pilas
     t_push_swap push_swap;
     push_swap.a = NULL;
     push_swap.b = NULL;
     push_swap.a_size = 0;
 
-    // Añadir elementos a la pila a desde los argumentos de la línea de comandos
     for (int i = 1; i < argc; i++) {
         int value = atoi(argv[i]);
         push(&push_swap.a, value);
@@ -289,7 +198,6 @@ int main(int argc, char *argv[]) {
 
     bubblesort(&push_swap.a);
 
-    // Ordenar la pila usando K-Sort
     k_sort1(&push_swap);
     k_sort2(&push_swap);
 
@@ -298,4 +206,8 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
+
+
+
+
 
