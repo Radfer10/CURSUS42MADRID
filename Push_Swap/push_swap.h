@@ -16,10 +16,11 @@
 # include <stdio.h>
 # include <limits.h>
 # include <unistd.h>
-# include "../libft/libft.h"
+/*# include "../libft/libft.h"*/
 # include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct s_stack {
     int content;
@@ -37,7 +38,7 @@ typedef struct s_push_swap {
 void push_swap_main(t_push_swap *push_swap);
 int is_sorted(t_stack *stack);
 /*parseo*/
-int ft_isdigit(char c);
+int ft_isdigit2(char c);
 long long ft_atoll(const char *str);
 int ft_atoi(const char *str);
 void display_error(const char *message, int exit_code);
@@ -56,17 +57,17 @@ void	ss(t_push_swap *push_swap);
 void push(t_stack **stack_a, t_stack **stack_b);
 void	pa(t_push_swap *push_swap);
 void	pb(t_push_swap *push_swap);
-t_stack *rotate(t_stack *stack);
+void    rotate(t_stack **stack);
 void	ra(t_push_swap *push_swap);
 void	rb(t_push_swap *push_swap);
 void	rr(t_push_swap *push_swap);
-t_stack *reverse_rotate(t_stack *stack);
+void    reverse_rotate(t_stack **stack);
 void	rra(t_push_swap *push_swap);
 void	rrb(t_push_swap *push_swap);
 void	rrr(t_push_swap *push_swap);
 /*sorting*/
 int stack_size(t_stack *stack);
-int count_r(t_stack *stack, int index) ;
+int count_r(t_stack *stack, int index);
 int ft_sqrt(int num);
 void assign_indices(t_stack **stack);
 void insertion_sort(t_stack **stack);
@@ -79,6 +80,9 @@ void sort_4(t_push_swap *push_swap);
 void sort_5(t_push_swap *push_swap);
 /*main*/
 int main(int argc, char *argv[]);
-
+void print_stack(t_stack *stack);
+void push2(t_stack **stack, int value);
+/*sorting_utils*/
+t_stack *find_min(t_stack *stack);
 
 #endif

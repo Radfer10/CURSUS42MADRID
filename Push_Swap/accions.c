@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "push_swap.h"
 
 t_stack *swap(t_stack *stack)
 {
@@ -63,72 +63,56 @@ void	pb(t_push_swap *push_swap)
 	push(&push_swap->b, &push_swap->a);
 }
 
-t_stack *rotate(t_stack *stack)
-{
-    if (!stack || !stack->next)
-        return stack; 
-    
-    t_stack *first = stack;
-    t_stack *second = stack->next;
-    t_stack *last = stack;
-    
-	while (last->next)
-    {
+void rotate(t_stack **stack) {
+    if (!*stack || !(*stack)->next) return;
+    t_stack *temp = *stack;
+    *stack = (*stack)->next;
+    temp->next = NULL;
+    t_stack *current = *stack;
+    while (current->next) {
+        current = current->next;
+    }
+    current->next = temp;
+}
+
+void ra(t_push_swap *push_swap) {
+    rotate(&(push_swap->a));
+}
+
+void rb(t_push_swap *push_swap) {
+    rotate(&(push_swap->b));
+}
+
+void rr(t_push_swap *push_swap) {
+    rotate(&(push_swap->a));
+    rotate(&(push_swap->b));
+}
+
+void reverse_rotate(t_stack **stack) {
+    if (!*stack || !(*stack)->next) return;
+    t_stack *second_last = NULL;
+    t_stack *last = *stack;
+    while (last->next) {
+        second_last = last;
         last = last->next;
     }
-	last->next = first;
-    stack = second;
-    first->next = NULL;
-	return stack;
-}
-
-
-void	ra(t_push_swap *push_swap)
-{
-	push_swap->a = rotate(push_swap->a);
-}
-
-void	rb(t_push_swap *push_swap)
-{
-	push_swap->b = rotate(push_swap->b);
-}
-
-void	rr(t_push_swap *push_swap)
-{
-	push_swap->a = rotate(push_swap->a);
-	push_swap->b = rotate(push_swap->b);
-}
-
-t_stack *reverse_rotate(t_stack *stack)
-{
-    if (!stack || !stack->next)
-        return stack; 
-    t_stack *last = stack;
-    t_stack *prev_to_last = 0;
-    while (last->next)
-    {
-		
-        prev_to_last = last;
-		last = last->next;
-        
-    }
-	prev_to_last->next = 0;
-    last->next = stack;
-	return last;
+    second_last->next = NULL;
+    last->next = *stack;
+    *stack = last;
 }
 
 void	rra(t_push_swap *push_swap)
 {
-	push_swap->a = reverse_rotate(push_swap->a);
+	reverse_rotate(&(push_swap->a));
 }
 
 void	rrb(t_push_swap *push_swap)
 {
-	push_swap->b = reverse_rotate(push_swap->b);
+	reverse_rotate(&(push_swap->b));
 }
 
 void	rrr(t_push_swap *push_swap)
 {
-	push_swap->a = reverse_rotate(push_swap->a);
-	push_swap->b = reverse_rotate(push_swap->b);
+	reverse_rotate(&(push_swap->a));
+	reverse_rotate(&(push_swap->b));
 }

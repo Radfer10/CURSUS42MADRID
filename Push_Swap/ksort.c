@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "push_swap.h"
 
 int stack_size(t_stack *stack) {
     int count = 0;
@@ -137,7 +137,7 @@ void k_sort2(t_push_swap *push_swap) {
 
 void k_sort(t_push_swap *push_swap) {
     assign_indices(&(push_swap->a));
-    insertion_sort(&(push_swap->a));
+    /*insertion_sort(&(push_swap->a));*/
     k_sort1(push_swap);
     k_sort2(push_swap);
 }

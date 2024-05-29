@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "push_swap.h"
 
 void sort_5(t_push_swap *push_swap) {
     if (push_swap == NULL || push_swap->a == NULL)

@@ -20,7 +20,7 @@ SOURC	:= accions.c parseo.c ksort.c sort2.c sort3.c sort4.c sort5.c main.c push_
 SOURCE := $(addprefix ./source/, $(SOURC))
 OBJECTS := $(SOURCE:.c=.o)
 LIBFT := libft/libft.a
-LIBRARY := -lmlx -framework OpenGL -framework AppKit
+LIBRARY := ./includes/push_swap.h
 
 %.o: %.c 
 	$(CC) $(CFLAGS) -c $< -o $@

@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "push_swap.h"
 
-int ft_isdigit(char c) {
+int ft_isdigit2(char c) {
     return (c >= '0' && c <= '9');
 }
 
@@ -23,7 +23,7 @@ long long ft_atoll(const char *str) {
         sign = -1;
         str++;
     }
-    while (*str && ft_isdigit(*str)) {
+    while (*str && ft_isdigit2(*str)) {
         result = result * 10 + (*str - '0');
         str++;
     }
@@ -90,10 +90,10 @@ int check_digits(int argc, char **argv) {
     for (i = 1; i < argc; i++) {
         j = 0;
         while (argv[i][j]) {
-            if (!ft_isdigit(argv[i][j]) && argv[i][j] != ' ' && argv[i][j] != '-') {
+            if (!ft_isdigit2(argv[i][j]) && argv[i][j] != ' ' && argv[i][j] != '-') {
                 return -1;
             }
-            if (ft_isdigit(argv[i][j]) && (argv[i][j + 1] == ' ' || argv[i][j + 1] == '\0')) {
+            if (ft_isdigit2(argv[i][j]) && (argv[i][j + 1] == ' ' || argv[i][j + 1] == '\0')) {
                 count++;
             }
             j++;
