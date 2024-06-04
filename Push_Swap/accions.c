@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:03:04 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/05/28 20:03:19 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/04 22:26:39 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,15 @@ void	pb(t_push_swap *push_swap)
 }
 
 void rotate(t_stack **stack) {
-    if (!*stack || !(*stack)->next) return;
-    t_stack *temp = *stack;
-    *stack = (*stack)->next;
-    temp->next = NULL;
-    t_stack *current = *stack;
-    while (current->next) {
-        current = current->next;
-    }
-    current->next = temp;
+    if (*stack == NULL || (*stack)->next == NULL)
+        return;
+    t_stack *first = *stack;
+    t_stack *last = *stack;
+    while (last->next != NULL)
+        last = last->next;
+    *stack = first->next;
+    first->next = NULL;
+    last->next = first;
 }
 
 void ra(t_push_swap *push_swap) {

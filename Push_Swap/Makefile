@@ -6,7 +6,7 @@
 #    By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/28 23:21:23 by rde-migu          #+#    #+#              #
-#    Updated: 2024/05/28 23:45:05 by rde-migu         ###   ########.fr        #
+#    Updated: 2024/06/04 22:33:50 by rde-migu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME := push_swap
 
 CC := gcc
 
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -g3 -fsanitize=address
 
 SOURCES := accions.c parseo.c sort_utils.c ksort.c sort2.c sort3.c sort4.c sort5.c main.c push_swap.c
 OBJECTS := $(SOURCES:.c=.o)

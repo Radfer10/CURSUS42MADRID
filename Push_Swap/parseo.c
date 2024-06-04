@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:03:39 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/05/28 20:04:03 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/04 21:32:33 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ void arg_parse(t_push_swap *ps, int argc, char **argv) {
                     free(ps->a);
                     ps->a = temp;
                 }
-                display_error("Error: Duplicate number found", 1);
+                display_error("Error", 1);
             }
             add_to_stack(&ps->a, num);
             ps->a_size++;

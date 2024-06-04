@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:20:40 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/05/28 23:42:28 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/04 21:51:18 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_push_swap {
     t_stack *a;
     t_stack *b;
     int a_size;
+    int b_size;
 } t_push_swap;
 
 /*push_swap*/
@@ -69,8 +70,10 @@ void	rrr(t_push_swap *push_swap);
 int stack_size(t_stack *stack);
 int count_r(t_stack *stack, int index);
 int ft_sqrt(int num);
-void assign_indices(t_stack **stack);
-void insertion_sort(t_stack **stack);
+/*void assign_indices(t_stack **stack);*/
+void s_insertion_sort(t_push_swap *push_swap, int length);
+int get_min_index(t_stack *stack);
+int get_min_index(t_stack *stack);
 void k_sort1(t_push_swap *push_swap);
 void k_sort2(t_push_swap *push_swap);
 void k_sort(t_push_swap *push_swap);
@@ -84,5 +87,4 @@ void print_stack(t_stack *stack);
 void push2(t_stack **stack, int value);
 /*sorting_utils*/
 t_stack *find_min(t_stack *stack);
-
 #endif
