@@ -43,7 +43,7 @@ char **ft_split(const char *str, char delimiter) {
     char **result;
     int count = 0;
     int i = 0;
-    int j = 0;
+    
 
     // Counting the number of splits
     while (str[i]) {

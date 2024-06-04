@@ -16,37 +16,30 @@ CC := gcc
 
 CFLAGS := -Wall -Wextra -Werror
 
-SOURC	:= accions.c parseo.c ksort.c sort2.c sort3.c sort4.c sort5.c main.c push_swap.c 
-SOURCE := $(addprefix ./source/, $(SOURC))
-OBJECTS := $(SOURCE:.c=.o)
+SOURCES := accions.c parseo.c sort_utils.c ksort.c sort2.c sort3.c sort4.c sort5.c main.c push_swap.c
+OBJECTS := $(SOURCES:.c=.o)
 LIBFT := libft/libft.a
-LIBRARY := ./includes/push_swap.h
+LIBRARY := includes/push_swap.h
 
-%.o: %.c 
+%.o: %.c $(LIBRARY)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(PRINTF) $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) $(GETNEXTLINE) $(LIBFT) $(PRINTF) $(LIBRARY) -o $(NAME)
-
+$(NAME): $(LIBFT) $(OBJECTS)
+	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
 	make -C libft
 
-$(PRINTF):
-	make -C ft_printf
-
 clean:
-	$(RM) $(OBJECTS) $(BONUS_OBJ)
+	$(RM) $(OBJECTS)
 	make clean -C libft
-	make clean -C ft_printf
 
 fclean: clean
 	make fclean -C libft
-	make fclean -C ft_printf
-	rm -rf $(NAME) so_long_bonus
+	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
