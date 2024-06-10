@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:11:09 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/04 21:38:10 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:24:57 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@
     return 0;
 }*/
 
+
+
 int main(int argc, char *argv[]) {
     if (argc < 2) {
         /*printf("Usage: %s [numbers...]\n", argv[0]);*/
@@ -87,6 +89,10 @@ int main(int argc, char *argv[]) {
 
     /*printf("Sorted stack: ");
     print_stack(push_swap.a);*/
+    
+    free_stack(&push_swap.a);
+    free_stack(&push_swap.b);
+    
 
     return 0;
 }

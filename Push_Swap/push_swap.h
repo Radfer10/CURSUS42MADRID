@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:20:40 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/04 21:51:18 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/10 19:13:56 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int contains_duplicate(t_stack *stack, int value);
 void check_range(char **s_numbers, t_stack **stack);
 void add_to_stack(t_stack **stack, int num);
 void arg_parse(t_push_swap *ps, int argc, char **argv);
+
 /*accions*/
 t_stack *swap(t_stack *stack);
 void	sa(t_push_swap *push_swap);
@@ -80,10 +81,12 @@ void sort_2(t_push_swap *push_swap);
 void sort_3(t_push_swap *push_swap);
 void sort_4(t_push_swap *push_swap);
 void sort_5(t_push_swap *push_swap);
+int where_small(t_stack *stack, t_stack *min_node);
 /*main*/
 int main(int argc, char *argv[]);
 void print_stack(t_stack *stack);
 void push2(t_stack **stack, int value);
+void free_stack(t_stack **stack);
 /*sorting_utils*/
 t_stack *find_min(t_stack *stack);
 #endif
