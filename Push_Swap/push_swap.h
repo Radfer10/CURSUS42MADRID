@@ -70,9 +70,8 @@ void	rrr(t_push_swap *push_swap);
 int stack_size(t_stack *stack);
 int count_r(t_stack *stack, int index);
 int ft_sqrt(int num);
-/*void assign_indices(t_stack **stack);*/
-void s_insertion_sort(t_push_swap *push_swap, int length);
-int get_min_index(t_stack *stack);
+void assign_indices(t_stack **stack);
+void insertion_sort(t_stack **stack);
 int get_min_index(t_stack *stack);
 void k_sort1(t_push_swap *push_swap);
 void k_sort2(t_push_swap *push_swap);

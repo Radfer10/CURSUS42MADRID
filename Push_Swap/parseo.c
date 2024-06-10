@@ -132,11 +132,24 @@ void check_range(char **s_numbers, t_stack **stack) {
 
 void add_to_stack(t_stack **stack, int num) {
     t_stack *new_node = malloc(sizeof(t_stack));
-    if (!new_node) display_error("Error", 1);
+    if (!new_node) {
+        fprintf(stderr, "Memory allocation error\n");
+        exit(1);
+    }
     new_node->content = num;
-    new_node->next = *stack;
-    *stack = new_node;
+    new_node->next = NULL;
+
+    if (*stack == NULL) {
+        *stack = new_node;
+    } else {
+        t_stack *current = *stack;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = new_node;
+    }
 }
+
 
 void arg_parse(t_push_swap *ps, int argc, char **argv) {
     char **s_numbers;

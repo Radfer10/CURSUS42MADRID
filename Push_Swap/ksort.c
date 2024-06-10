@@ -41,14 +41,22 @@ int ft_sqrt(int num) {
 
 void assign_indices(t_stack **stack) {
     int size = stack_size(*stack);
+    if (size <= 1) return;
+
     t_stack **array = malloc(size * sizeof(t_stack *));
+    if (!array) {
+        fprintf(stderr, "Memory allocation error\n");
+        exit(1);
+    }
+
     t_stack *current = *stack;
     for (int i = 0; i < size; i++) {
         array[i] = current;
         current = current->next;
     }
 
-    for (int i = 0; i < size; i++) {
+
+    for (int i = 0; i < size - 1; i++) {
         for (int j = i + 1; j < size; j++) {
             if (array[i]->content > array[j]->content) {
                 t_stack *tmp = array[i];
@@ -58,12 +66,37 @@ void assign_indices(t_stack **stack) {
         }
     }
 
+
     for (int i = 0; i < size; i++) {
         array[i]->index = i;
     }
 
     free(array);
 }
+
+
+void insertion_sort(t_stack **stack) {
+    t_stack *sorted = NULL;
+    while (*stack) {
+        t_stack *current = *stack;
+        *stack = (*stack)->next;
+
+        if (!sorted || current->content < sorted->content) {
+            current->next = sorted;
+            sorted = current;
+        } else {
+            t_stack *temp = sorted;
+            while (temp->next && temp->next->content < current->content) {
+                temp = temp->next;
+            }
+            current->next = temp->next;
+            temp->next = current;
+        }
+    }
+    *stack = sorted;
+}
+
+
 
 /*void simple_sort(t_stack *stack, int length) {
     if (length < 2)
@@ -154,19 +187,22 @@ void k_sort1(t_push_swap *push_swap) {
     int range = ft_sqrt(push_swap->a_size) * 14 / 10;
 
     while (push_swap->a != NULL) {
+        /*printf("a index: %d, i: %d, range: %d\n", push_swap->a->index, i, range);*/
         if (push_swap->a->index <= i) {
             pb(push_swap);
-            write(1, "pb\n", 3);
-            rotate(&(push_swap->b));
-            write(1, "rb\n", 3);
+            printf("pb\n");
             i++;
         } else if (push_swap->a->index <= i + range) {
             pb(push_swap);
-            write(1, "pb\n", 3);
+            printf("pb\n");
+            if (push_swap->b && push_swap->b->next) {
+                rotate(&(push_swap->b));
+                printf("rb\n");
+            }
             i++;
         } else {
             rotate(&(push_swap->a));
-            write(1, "ra\n", 3);
+            printf("ra\n");
         }
     }
 }
@@ -180,25 +216,31 @@ void k_sort2(t_push_swap *push_swap) {
         rb_count = count_r(push_swap->b, length - 1);
         rrb_count = stack_size(push_swap->b) - rb_count;
 
+        /*printf("rb_count: %d, rrb_count: %d, length: %d\n", rb_count, rrb_count, length);*/
+
         if (rb_count <= rrb_count) {
             while (push_swap->b->index != length - 1) {
                 rotate(&(push_swap->b));
-                write(1, "rb\n", 3);
+                printf("rb\n");
             }
         } else {
             while (push_swap->b->index != length - 1) {
                 reverse_rotate(&(push_swap->b));
-                write(1, "rrb\n", 4);
+                printf("rrb\n");
             }
         }
         pa(push_swap);
-        write(1, "pa\n", 3);
+        printf("pa\n");
         length--;
     }
 }
+
+
+
 
 void k_sort(t_push_swap *push_swap) {
     assign_indices(&(push_swap->a));
     k_sort1(push_swap);
     k_sort2(push_swap);
 }
+

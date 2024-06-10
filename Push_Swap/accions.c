@@ -53,23 +53,38 @@ void push(t_stack **stack_a, t_stack **stack_b)
     *stack_a = tmp;
 }
 
-void	pa(t_push_swap *push_swap)
-{
-	push(&push_swap->a, &push_swap->b);
+void pa(t_push_swap *push_swap) {
+    t_stack *tmp;
+
+    if (push_swap->b == NULL) return;
+
+    tmp = push_swap->b;
+    push_swap->b = push_swap->b->next;
+    tmp->next = push_swap->a;
+    push_swap->a = tmp;
 }
 
-void	pb(t_push_swap *push_swap)
-{
-	push(&push_swap->b, &push_swap->a);
+void pb(t_push_swap *push_swap) {
+    t_stack *tmp;
+
+    if (push_swap->a == NULL) return;
+
+    tmp = push_swap->a;
+    push_swap->a = push_swap->a->next;
+    tmp->next = push_swap->b;
+    push_swap->b = tmp;
 }
 
 void rotate(t_stack **stack) {
-    if (*stack == NULL || (*stack)->next == NULL)
-        return;
+    if (!*stack || !(*stack)->next) return;
+
     t_stack *first = *stack;
     t_stack *last = *stack;
-    while (last->next != NULL)
+
+    while (last->next) {
         last = last->next;
+    }
+
     *stack = first->next;
     first->next = NULL;
     last->next = first;
@@ -90,15 +105,18 @@ void rr(t_push_swap *push_swap) {
 
 void reverse_rotate(t_stack **stack) {
     if (!*stack || !(*stack)->next) return;
-    t_stack *second_last = NULL;
-    t_stack *last = *stack;
-    while (last->next) {
-        second_last = last;
-        last = last->next;
+
+    t_stack *prev = NULL;
+    t_stack *current = *stack;
+
+    while (current->next) {
+        prev = current;
+        current = current->next;
     }
-    second_last->next = NULL;
-    last->next = *stack;
-    *stack = last;
+
+    prev->next = NULL;
+    current->next = *stack;
+    *stack = current;
 }
 
 void	rra(t_push_swap *push_swap)
