@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:05:52 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/05/28 20:06:07 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/11 17:50:56 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,12 @@ void sort_4(t_push_swap *push_swap) {
 
     while (push_swap->a != min_node) {
         ra(push_swap);
-        printf("ra\n");
+
     }
 
     pb(push_swap);
-    printf("pb\n");
 
     sort_3(push_swap);
 
     pa(push_swap);
-    printf("pa\n");
 }

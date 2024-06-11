@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:06:09 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/10 19:13:30 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/11 17:51:43 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void sort_5(t_push_swap *push_swap) {
     int i = where_small(push_swap->a, min_node);
 
     // Mueve el nodo mínimo a la posición adecuada
-    if (i == 2)
+    if (i == 2) {
         sa(push_swap);
-    else if (i == 3) {
+    } else if (i == 3) {
         ra(push_swap);
         sa(push_swap);
     } else if (i == 4) {
@@ -46,6 +46,7 @@ void sort_5(t_push_swap *push_swap) {
         rra(push_swap);
     } else if (i == 5) {
         rra(push_swap);
+        
     }
 
     // Mueve el nodo mínimo a la pila b
@@ -62,3 +63,5 @@ void sort_5(t_push_swap *push_swap) {
         sa(push_swap);
     }
 }
+
+

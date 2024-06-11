@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:03:04 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/04 22:26:39 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/11 17:38:15 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,20 @@ t_stack *swap(t_stack *stack)
 void	sa(t_push_swap *push_swap)
 {
 	push_swap->a = swap(push_swap->a);
+    printf("sa\n");
 }
 
 void	sb(t_push_swap *push_swap)
 {
 	push_swap->b = swap(push_swap->b);
+    printf("sb\n");
 }
 
 void	ss(t_push_swap *push_swap)
 {
 	push_swap->a = swap(push_swap->a);
 	push_swap->b = swap(push_swap->b);
+    printf("ss\n");
 }
 
 void push(t_stack **stack_a, t_stack **stack_b)
@@ -62,6 +65,7 @@ void pa(t_push_swap *push_swap) {
     push_swap->b = push_swap->b->next;
     tmp->next = push_swap->a;
     push_swap->a = tmp;
+    printf("pa\n");
 }
 
 void pb(t_push_swap *push_swap) {
@@ -73,6 +77,7 @@ void pb(t_push_swap *push_swap) {
     push_swap->a = push_swap->a->next;
     tmp->next = push_swap->b;
     push_swap->b = tmp;
+    printf("pb\n");
 }
 
 void rotate(t_stack **stack) {
@@ -92,15 +97,18 @@ void rotate(t_stack **stack) {
 
 void ra(t_push_swap *push_swap) {
     rotate(&(push_swap->a));
+    printf("ra\n");
 }
 
 void rb(t_push_swap *push_swap) {
     rotate(&(push_swap->b));
+    printf("rb\n");
 }
 
 void rr(t_push_swap *push_swap) {
     rotate(&(push_swap->a));
     rotate(&(push_swap->b));
+    printf("rr\n");
 }
 
 void reverse_rotate(t_stack **stack) {
@@ -122,15 +130,18 @@ void reverse_rotate(t_stack **stack) {
 void	rra(t_push_swap *push_swap)
 {
 	reverse_rotate(&(push_swap->a));
+    printf("rra\n");
 }
 
 void	rrb(t_push_swap *push_swap)
 {
 	reverse_rotate(&(push_swap->b));
+    printf("rrb\n");
 }
 
 void	rrr(t_push_swap *push_swap)
 {
 	reverse_rotate(&(push_swap->a));
 	reverse_rotate(&(push_swap->b));
+    printf("rrr\n");
 }
