@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:11:09 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/11 17:21:57 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/11 18:43:40 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,14 @@
 #include <stdlib.h>
 #include "push_swap.h"
 
-/*int main(int argc, char *argv[]) {
-    if (argc < 2) {
-        printf("Usage: %s [numbers...]\n", argv[0]);
-        return 1;
+void free_stack(t_stack **stack) {
+    t_stack *temp;
+    while (*stack) {
+        temp = (*stack)->next;
+        free(*stack);
+        *stack = temp;
     }
-
-    t_push_swap push_swap;
-    push_swap.a = NULL;
-    push_swap.b = NULL;
-    push_swap.a_size = 0;
-
-    for (int i = 1; i < argc; i++) {
-        int value = atoi(argv[i]);
-        push2(&push_swap.a, value);
-    }
-    push_swap.a_size = stack_size(push_swap.a);
-
-    printf("Original stack: ");
-    print_stack(push_swap.a);
-
-    
-
-    printf("Stack with indices: ");
-    t_stack *tmp = push_swap.a;
-    while (tmp) {
-        printf("%d(%d) ", tmp->content, tmp->index);
-        tmp = tmp->next;
-    }
-    printf("\n");
-
-    // Llamada a push_swap
-    push_swap_main(&push_swap);
-
-    printf("Sorted stack: ");
-    print_stack(push_swap.a);
-
-    return 0;
-}*/
-
+}
 
 
 int main(int argc, char *argv[]) {

@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:20:40 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/10 19:13:56 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/11 18:25:41 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdio.h>
 # include <limits.h>
 # include <unistd.h>
-/*# include "../libft/libft.h"*/
+# include "../libft/libft.h"
 # include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
