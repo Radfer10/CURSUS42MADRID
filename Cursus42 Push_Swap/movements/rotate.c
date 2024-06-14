@@ -1,0 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/14 16:48:38 by rde-migu          #+#    #+#             */
+/*   Updated: 2024/06/14 18:41:02 by rde-migu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/push_swap.h"
+
+void	ra(t_push_swap *push_swap)
+{
+	rotate(&(push_swap->a));
+	printf("ra\n");
+}
+
+void	rb(t_push_swap *push_swap)
+{
+	rotate(&(push_swap->b));
+	printf("rb\n");
+}
+
+void	rr(t_push_swap *push_swap)
+{
+	rotate(&(push_swap->a));
+	rotate(&(push_swap->b));
+	printf("rr\n");
+}
