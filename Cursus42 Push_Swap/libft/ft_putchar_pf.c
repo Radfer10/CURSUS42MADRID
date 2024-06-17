@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   ft_putchar_pf.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/14 16:48:38 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/17 19:12:54 by rde-migu         ###   ########.fr       */
+/*   Created: 2024/02/23 14:01:14 by rde-migu          #+#    #+#             */
+/*   Updated: 2024/03/08 14:36:54 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "ft_printf.h"
 
-void	ra(t_push_swap *push_swap)
+void	ft_putchar_pf(char c, int *i)
 {
-	rotate(&(push_swap->a));
-	ft_printf("ra\n");
-}
-
-void	rb(t_push_swap *push_swap)
-{
-	rotate(&(push_swap->b));
-	ft_printf("rb\n");
-}
-
-void	rr(t_push_swap *push_swap)
-{
-	rotate(&(push_swap->a));
-	rotate(&(push_swap->b));
-	ft_printf("rr\n");
+	write(1, &c, 1);
+	(*i)++;
 }

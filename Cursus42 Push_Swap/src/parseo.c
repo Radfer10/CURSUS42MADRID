@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:03:39 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/14 19:51:29 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:16:39 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	add_to_stack(t_stack **stack, int num)
 	new_node = malloc(sizeof(t_stack));
 	if (!new_node)
 	{
-		fprintf(stderr, "Memory allocation error\n");
+		ft_printf("Memory allocation error\n");
 		free_stack(stack);
 		exit(1);
 	}

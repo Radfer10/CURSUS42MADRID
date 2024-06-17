@@ -6,7 +6,7 @@
 #    By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/13 19:24:30 by rde-migu          #+#    #+#              #
-#    Updated: 2024/04/22 22:07:10 by rde-migu         ###   ########.fr        #
+#    Updated: 2024/06/17 19:04:51 by rde-migu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ RM = rm -f
 CC = gcc
 CCFLAGS = -Wall -Wextra -Werror
 NAME = libft.a 
-SRC = ft_tolower.c ft_putstr_fd.c ft_putendl_fd.c ft_isalnum.c ft_isalpha.c ft_isdigit.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_strncmp.c ft_strnstr.c ft_putchar_fd.c ft_putnbr_fd.c ft_strjoin.c ft_calloc.c ft_strdup.c ft_memchr.c ft_memcmp.c ft_substr.c ft_itoa.c ft_split.c ft_strrchr.c ft_strmapi.c ft_striteri.c ft_atoi.c ft_strchr.c ft_strtrim.c
+SRC = ft_tolower.c ft_putstr_fd.c ft_putendl_fd.c ft_isalnum.c ft_isalpha.c ft_isdigit.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_strncmp.c ft_strnstr.c ft_putchar_fd.c ft_putnbr_fd.c ft_strjoin.c ft_calloc.c ft_strdup.c ft_memchr.c ft_memcmp.c ft_substr.c ft_itoa.c ft_split.c ft_strrchr.c ft_strmapi.c ft_striteri.c ft_atoi.c ft_strchr.c ft_strtrim.c ft_putchar_pf.c ft_printf.c ft_putnbr_pf.c ft_putstr_pf.c ft_putunbr_pf.c ft_puthex_pf.c ft_puthexmayus_pf.c ft_puntero_pf.c
 OBJ = $(SRC:.c=.o)
 INCLUDE = libft.h 
 

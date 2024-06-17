@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   ft_puthexmayus_pf.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/14 16:48:38 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/17 19:12:54 by rde-migu         ###   ########.fr       */
+/*   Created: 2024/02/26 14:42:21 by rde-migu          #+#    #+#             */
+/*   Updated: 2024/02/27 19:48:26 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "ft_printf.h"
 
-void	ra(t_push_swap *push_swap)
+void	ft_puthexmayus_pf(unsigned int n, int *i)
 {
-	rotate(&(push_swap->a));
-	ft_printf("ra\n");
-}
+	char	*hex;
 
-void	rb(t_push_swap *push_swap)
-{
-	rotate(&(push_swap->b));
-	ft_printf("rb\n");
-}
-
-void	rr(t_push_swap *push_swap)
-{
-	rotate(&(push_swap->a));
-	rotate(&(push_swap->b));
-	ft_printf("rr\n");
+	hex = "0123456789ABCDEF";
+	if (n >= 16)
+	{
+		ft_puthexmayus_pf(n / 16, i);
+		ft_putchar_pf(hex[n % 16], i);
+	}
+	else
+	{
+		ft_putchar_pf(hex[n % 16], i);
+	}
 }

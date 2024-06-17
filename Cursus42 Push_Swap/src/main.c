@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:11:09 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/14 19:04:30 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:16:29 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	contains_duplicate(t_stack *stack, int value)
 
 void	display_error(const char *message, int exit_code)
 {
-	fprintf(stderr, "%s\n", message);
+	ft_printf("%s\n", message);
 	exit(exit_code);
 }
 

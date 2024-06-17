@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   ft_putnbr_pf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/14 16:48:38 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/17 19:12:54 by rde-migu         ###   ########.fr       */
+/*   Created: 2024/02/23 17:21:17 by rde-migu          #+#    #+#             */
+/*   Updated: 2024/02/27 18:29:38 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "ft_printf.h"
 
-void	ra(t_push_swap *push_swap)
+void	ft_putnbr_pf(int n, int *i)
 {
-	rotate(&(push_swap->a));
-	ft_printf("ra\n");
-}
-
-void	rb(t_push_swap *push_swap)
-{
-	rotate(&(push_swap->b));
-	ft_printf("rb\n");
-}
-
-void	rr(t_push_swap *push_swap)
-{
-	rotate(&(push_swap->a));
-	rotate(&(push_swap->b));
-	ft_printf("rr\n");
+	if (n == -2147483648)
+		ft_putstr_pf("-2147483648", i);
+	if (n < 0 && n != -2147483648)
+	{
+		ft_putchar_pf('-', i);
+		n = -n;
+	}
+	if (n >= 10)
+	{
+		ft_putnbr_pf(n / 10, i);
+		n %= 10;
+	}
+	if (n != -2147483648)
+		ft_putchar_pf(n + '0', i);
 }

@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 15:58:26 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/04/26 00:11:33 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:07:52 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,13 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
+int					ft_printf(const char *str, ...);
+void				ft_putchar_pf(char c, int *i);
+void				ft_putnbr_pf(int n, int *i);
+void				ft_putstr_pf(char *str, int *i);
+void				ft_putunbr_pf(int n, int *i);
+void				ft_puthex_pf(unsigned int n, int *i);
+void				ft_puthexmayus_pf(unsigned int n, int *i);
+void				ft_puntero_pf(void *ptr, int *i);
 
 #endif

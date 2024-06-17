@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   ft_putstr_pf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/14 16:48:38 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/17 19:12:54 by rde-migu         ###   ########.fr       */
+/*   Created: 2024/02/23 17:45:03 by rde-migu          #+#    #+#             */
+/*   Updated: 2024/03/08 14:37:56 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "ft_printf.h"
 
-void	ra(t_push_swap *push_swap)
+void	ft_putstr_pf(char *str, int *len)
 {
-	rotate(&(push_swap->a));
-	ft_printf("ra\n");
-}
+	int	i;
 
-void	rb(t_push_swap *push_swap)
-{
-	rotate(&(push_swap->b));
-	ft_printf("rb\n");
-}
-
-void	rr(t_push_swap *push_swap)
-{
-	rotate(&(push_swap->a));
-	rotate(&(push_swap->b));
-	ft_printf("rr\n");
+	i = 0;
+	if (!str)
+		str = "(null)";
+	while (str[i] != '\0')
+	{
+		write(1, &str[i], 1);
+		i++;
+		(*len)++;
+	}
 }
