@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:03:39 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/17 19:16:39 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/17 23:43:38 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,26 @@ void	add_to_stack(t_stack **stack, int num)
 	}
 }
 
+void	add_numbers_to_stack(t_push_swap *ps, char **s_numbers)
+{
+	int	num;
+	int	k;
+
+	k = 0;
+	while (s_numbers[k])
+	{
+		num = ft_atoi(s_numbers[k]);
+		if (contains_duplicate(ps->a, num))
+		{
+			free_stack(&ps->a);
+			display_error("Error", 1);
+		}
+		add_to_stack(&ps->a, num);
+		ps->a_size++;
+		k++;
+	}
+}
+
 void	parse_arguments(t_push_swap *ps, int argc, char **argv)
 {
 	char	**s_numbers;
@@ -59,26 +79,6 @@ void	parse_arguments(t_push_swap *ps, int argc, char **argv)
 		add_numbers_to_stack(ps, s_numbers);
 		free_2d(s_numbers);
 		i++;
-	}
-}
-
-void	add_numbers_to_stack(t_push_swap *ps, char **s_numbers)
-{
-	int	num;
-	int	k;
-
-	k = 0;
-	while (s_numbers[k])
-	{
-		num = ft_atoi(s_numbers[k]);
-		if (contains_duplicate(ps->a, num))
-		{
-			free_stack(&ps->a);
-			display_error("Error", 1);
-		}
-		add_to_stack(&ps->a, num);
-		ps->a_size++;
-		k++;
 	}
 }
 
