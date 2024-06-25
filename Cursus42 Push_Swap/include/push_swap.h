@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:20:40 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/14 20:37:46 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/24 18:59:59 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include <limits.h>
+# include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -40,14 +41,15 @@ typedef struct s_push_swap
 void				push_swap_main(t_push_swap *push_swap);
 int					is_sorted(t_stack *stack);
 /*parseo*/
-int					ft_isdigit2(char c);
 long long			ft_atoll(const char *str);
 int					ft_atoi(const char *str);
-void				display_error(const char *message, int exit_code);
+void				display_error(char *message, int exit_code);
 char				**ft_split(const char *str, char delimiter);
 void				free_2d(char **array);
 int					check_digits(int argc, char **argv);
 int					contains_duplicate(t_stack *stack, int value);
+int					contains_non_numeric_characters(const char *str);
+int					contains_invalid_signs(const char *str);
 void				check_range(char **s_numbers, t_stack **stack);
 void				add_to_stack(t_stack **stack, int num);
 void				parse_arguments(t_push_swap *ps, int argc, char **argv);
@@ -93,7 +95,6 @@ int					where_small(t_stack *stack, t_stack *min_node);
 /*main*/
 int					main(int argc, char *argv[]);
 void				print_stack(t_stack *stack);
-void				push2(t_stack **stack, int value);
 void				free_stack(t_stack **stack);
 /*sorting_utils*/
 t_stack				*find_min(t_stack *stack);

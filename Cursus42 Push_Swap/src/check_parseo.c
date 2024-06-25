@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 20:58:24 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/14 21:08:31 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/24 19:00:38 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,57 @@ void	check_range(char **s_numbers, t_stack **stack)
 		}
 		i++;
 	}
+}
+
+int	contains_invalid_signs(const char *str)
+{
+	while (*str)
+	{
+		if ((*str == '-' && *(str + 1) == '-') || (*str == '+' && *(str
+					+ 1) == '+'))
+		{
+			return (1);
+		}
+		if ((*str == '-' || *str == '+') && !(*(str + 1) >= '0' && *(str
+					+ 1) <= '9'))
+		{
+			return (1);
+		}
+		str++;
+	}
+	return (0);
+}
+
+int	contains_duplicate(t_stack *stack, int value)
+{
+	while (stack)
+	{
+		if (stack->content == value)
+		{
+			return (1);
+		}
+		if (stack->next)
+		{
+			if ((stack->content == '-' && stack->next->content == '-')
+				|| (stack->content == '+' && stack->next->content == '+'))
+			{
+				return (1);
+			}
+		}
+		stack = stack->next;
+	}
+	return (0);
+}
+
+int	contains_non_numeric_characters(const char *str)
+{
+	while (*str)
+	{
+		if (!ft_isdigit(*str) && *str != '-' && *str != '+')
+		{
+			return (1);
+		}
+		str++;
+	}
+	return (0);
 }

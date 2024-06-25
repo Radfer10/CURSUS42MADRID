@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:11:09 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/17 19:16:29 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/18 05:33:14 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,9 @@ void	free_stack(t_stack **stack)
 	}
 }
 
-int	contains_duplicate(t_stack *stack, int value)
+void	display_error(char *message, int exit_code)
 {
-	while (stack)
-	{
-		if (stack->content == value)
-		{
-			return (1);
-		}
-		stack = stack->next;
-	}
-	return (0);
-}
-
-void	display_error(const char *message, int exit_code)
-{
-	ft_printf("%s\n", message);
+	ft_putendl_fd(message, 2);
 	exit(exit_code);
 }
 

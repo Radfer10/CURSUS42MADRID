@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:03:39 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/17 23:43:38 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/24 19:01:13 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	add_to_stack(t_stack **stack, int num)
 	new_node = malloc(sizeof(t_stack));
 	if (!new_node)
 	{
-		ft_printf("Memory allocation error\n");
+		ft_putstr_fd("Memory allocation error\n", 2);
 		free_stack(stack);
 		exit(1);
 	}
@@ -49,6 +49,12 @@ void	add_numbers_to_stack(t_push_swap *ps, char **s_numbers)
 	k = 0;
 	while (s_numbers[k])
 	{
+		if (contains_invalid_signs(s_numbers[k])
+			|| contains_non_numeric_characters(s_numbers[k]))
+		{
+			free_stack(&ps->a);
+			display_error("Error", 1);
+		}
 		num = ft_atoi(s_numbers[k]);
 		if (contains_duplicate(ps->a, num))
 		{

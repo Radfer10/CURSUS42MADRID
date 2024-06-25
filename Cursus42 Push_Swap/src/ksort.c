@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:04:31 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/18 05:05:07 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/24 21:27:15 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	k_sort1(t_push_swap *push_swap)
 	int	range;
 
 	i = 0;
-	range = ft_sqrt(push_swap->a_size) * 14 / 10;
+	range = ft_sqrt(push_swap->a_size) * 13.634 / 10;
 	while (push_swap->a != NULL)
 	{
 		if (push_swap->a->index <= i)
@@ -94,12 +94,10 @@ void	k_sort1(t_push_swap *push_swap)
 			pb(push_swap);
 			if (push_swap->b && push_swap->b->next)
 				rb(push_swap);
-			i++;
+			++i;
 		}
 		else
-		{
 			ra(push_swap);
-		}
 	}
 }
 

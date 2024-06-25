@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:54:26 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/14 21:02:58 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/18 03:23:01 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	**ft_split_strings(const char *str, char delimiter, char **result)
 	return (result);
 }
 
-char	**ft_split(const char *str, char delimiter)
+char	**_split(const char *str, char delimiter)
 {
 	int		count;
 	int		i;
@@ -83,11 +83,12 @@ char	**ft_split(const char *str, char delimiter)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == delimiter)
+		if (str[i] != delimiter && (str[i + 1] == delimiter || \
+			str[i + 1] == '\0'))
 			count++;
 		i++;
 	}
-	result = malloc((count + 2) * sizeof(char *));
+	result = malloc((count + 1) * sizeof(char *));
 	if (!result)
 		return (NULL);
 	return (ft_split_strings(str, delimiter, result));
