@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 20:04:31 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/17 19:22:13 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/18 05:05:07 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	k_sort2(t_push_swap *push_swap)
 			while (push_swap->b->index != length - 1)
 			{
 				reverse_rotate(&(push_swap->b));
-				printf("rrb\n");
+				ft_printf("rrb\n");
 			}
 		}
 		pa(push_swap);

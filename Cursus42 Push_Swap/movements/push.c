@@ -6,7 +6,7 @@
 /*   By: rde-migu <rde-migu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:47:42 by rde-migu          #+#    #+#             */
-/*   Updated: 2024/06/17 19:12:34 by rde-migu         ###   ########.fr       */
+/*   Updated: 2024/06/18 05:20:32 by rde-migu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	pa(t_push_swap *push_swap)
 	push_swap->b = push_swap->b->next;
 	tmp->next = push_swap->a;
 	push_swap->a = tmp;
-	ft_printf("pa\n");
+	printf("pa\n");
 }
 
 void	pb(t_push_swap *push_swap)
@@ -35,5 +35,5 @@ void	pb(t_push_swap *push_swap)
 	push_swap->a = push_swap->a->next;
 	tmp->next = push_swap->b;
 	push_swap->b = tmp;
-	ft_printf("pb\n");
+	printf("pb\n");
 }
